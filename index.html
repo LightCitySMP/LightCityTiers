@@ -1,152 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>LightCity SMP — Top Kills</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard</title>
   <style>
     body {
+      background-color: #121212;
+      font-family: Arial, sans-serif;
+      color: white;
       margin: 0;
       padding: 0;
-      background-color: #121212;
-      color: #eeeeee;
-      font-family: "Segoe UI", Tahoma, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
     }
 
-    .leaderboard-container {
-      margin-top: 50px;
-      width: 90%;
-      max-width: 600px;
-      background-color: #1e1e1e;
-      border: 2px solid #333;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    /* 🔹 TAB BAR */
     .tab-bar {
       display: flex;
       justify-content: center;
-      background-color: #2c2c2c;
-      padding: 10px;
-      gap: 10px;
+      background-color: #0d1117;
+      padding: 15px;
     }
 
     .tab-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       padding: 10px 20px;
       cursor: pointer;
-      font-size: 1em;
-      color: #ccc;
-      background-color: #1e1e1e;
-      border: 2px solid #333;
-      border-radius: 6px;
+      font-size: 0.95em;
+      color: #bdbdbd;
+      background-color: #161b22;
+      border-radius: 10px 10px 0 0;
       transition: all 0.2s ease;
-    }
-
-    .tab-button:hover {
-      background-color: #333;
-      color: white;
+      border: none;
     }
 
     .tab-button.active {
-      background-color: #4caf50; /* green highlight */
-      color: white;
-      border-color: #4caf50;
-      font-weight: bold;
-    }
-
-    .leaderboard-header {
-      background: linear-gradient(90deg, #4caf50, #2e7d32);
-      padding: 20px;
-      text-align: center;
-    }
-
-    .leaderboard-header h1 {
-      margin: 0;
-      font-size: 1.8em;
       color: #fff;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    thead tr {
-      background-color: #2c2c2c;
-    }
-
-    thead th {
-      padding: 12px;
-      font-size: 1em;
-      color: #cccccc;
-      text-align: left;
-    }
-
-    tbody tr {
-      transition: background-color 0.2s ease;
-    }
-
-    tbody tr:hover {
-      background-color: #333;
-    }
-
-    tbody td {
-      padding: 12px;
-      font-size: 1em;
-    }
-
-    .rank-1 td {
-      color: gold;
       font-weight: bold;
+      background-color: #1e242d;
     }
 
-    .rank-2 td {
-      color: silver;
-      font-weight: bold;
+    .tab-button img {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 5px;
     }
 
-    .rank-3 td {
-      color: #cd7f32; /* bronze */
-      font-weight: bold;
+    /* Leaderboard box placeholder */
+    .leaderboard {
+      max-width: 600px;
+      margin: 20px auto;
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
-  <div class="leaderboard-container">
 
-    <!-- 🔹 TAB BAR ABOVE LEADERBOARD -->
-    <div class="tab-bar">
-      <button class="tab-button active">Overall</button>
-      <button class="tab-button">Weekly</button>
-      <button class="tab-button">Monthly</button>
-    </div>
-
-    <div class="leaderboard-header">
-      <h1>🏆 Top Kills</h1>
-    </div>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Player</th>
-          <th>Kills</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="rank-1"><td>1</td><td>Player1</td><td>150</td></tr>
-        <tr class="rank-2"><td>2</td><td>Player2</td><td>122</td></tr>
-        <tr class="rank-3"><td>3</td><td>Player3</td><td>98</td></tr>
-        <tr><td>4</td><td>Player4</td><td>89</td></tr>
-        <tr><td>5</td><td>Player5</td><td>70</td></tr>
-        <tr><td>6</td><td>Player6</td><td>65</td></tr>
-      </tbody>
-    </table>
+  <div class="tab-bar">
+    <button class="tab-button active">
+      <img src="https://cdn-icons-png.flaticon.com/512/616/616489.png" alt="trophy">
+      Overall
+    </button>
   </div>
+
+  <div class="leaderboard">
+    <h2>Kills Leaderboard</h2>
+    <ol>
+      <li>Player1 - 120 kills</li>
+      <li>Player2 - 95 kills</li>
+      <li>Player3 - 70 kills</li>
+    </ol>
+  </div>
+
 </body>
 </html>
 
