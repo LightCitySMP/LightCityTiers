@@ -2,11 +2,84 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>LightCity SMP</title>
+  <title>LightCity SMP Leaderboards</title>
+  <style>
+    body {
+      font-family: "Courier New", monospace;
+      background-color: #1e1e1e;
+      color: white;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      background-color: #2c2c2c;
+      padding: 20px;
+      margin: 0;
+      font-size: 2.5em;
+    }
+    .leaderboard {
+      width: 80%;
+      max-width: 600px;
+      margin: 30px auto;
+      background-color: #2c2c2c;
+      border: 3px solid #4caf50;
+      border-radius: 10px;
+      padding: 15px;
+    }
+    .leaderboard h2 {
+      color: #4caf50;
+      margin-bottom: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border-bottom: 1px solid #444;
+      padding: 8px;
+    }
+    th {
+      background-color: #3a3a3a;
+    }
+    tr:hover {
+      background-color: #444;
+    }
+  </style>
 </head>
-<body style="font-family: Arial, sans-serif; text-align: center; background-color: #1e1e1e; color: white;">
-  <h1>Welcome to LightCity SMP</h1>
-  <p>This is the start of our official SMP website!</p>
-  <p>Leaderboards coming soon 👑</p>
+<body>
+  <h1>LightCity SMP Leaderboards</h1>
+
+  <div class="leaderboard">
+    <h2>🏆 Top Kills</h2>
+    <table>
+      <tr><th>Player</th><th>Kills</th></tr>
+      <tr><td>Player1</td><td>50</td></tr>
+      <tr><td>Player2</td><td>42</td></tr>
+      <tr><td>Player3</td><td>38</td></tr>
+    </table>
+  </div>
+
+  <div class="leaderboard">
+    <h2>⌛ Top Playtime</h2>
+    <table>
+      <tr><th>Player</th><th>Hours</th></tr>
+      <tr><td>PlayerA</td><td>120</td></tr>
+      <tr><td>PlayerB</td><td>95</td></tr>
+      <tr><td>PlayerC</td><td>88</td></tr>
+    </table>
+  </div>
+
+  <div class="leaderboard">
+    <h2>💰 Top Balance</h2>
+    <table>
+      <tr><th>Player</th><th>Money</th></tr>
+      <tr><td>PlayerX</td><td>$12,000</td></tr>
+      <tr><td>PlayerY</td><td>$9,500</td></tr>
+      <tr><td>PlayerZ</td><td>$8,700</td></tr>
+    </table>
+  </div>
+
 </body>
 </html>
+
