@@ -15,67 +15,119 @@
       align-items: flex-start;
       min-height: 100vh;
     }
+
     .leaderboard-container {
       margin-top: 50px;
       width: 90%;
-      max-width: 500px;
+      max-width: 600px;
       background-color: #1e1e1e;
       border: 2px solid #333;
       border-radius: 8px;
       overflow: hidden;
     }
+
+    /* 🔹 TAB BAR */
+    .tab-bar {
+      display: flex;
+      justify-content: center;
+      background-color: #2c2c2c;
+      border-bottom: 2px solid #333;
+    }
+
+    .tab-button {
+      flex: 1;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 1em;
+      color: #ccc;
+      border: none;
+      background: none;
+      outline: none;
+      transition: color 0.2s ease, border-bottom 0.2s ease;
+    }
+
+    .tab-button:hover {
+      color: white;
+    }
+
+    .tab-button.active {
+      color: white;
+      border-bottom: 3px solid white; /* highlight underline */
+      font-weight: bold;
+    }
+
     .leaderboard-header {
       background: linear-gradient(90deg, #4caf50, #2e7d32);
       padding: 20px;
       text-align: center;
     }
+
     .leaderboard-header h1 {
       margin: 0;
       font-size: 1.8em;
       color: #fff;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
     }
+
     thead tr {
       background-color: #2c2c2c;
     }
+
     thead th {
       padding: 12px;
       font-size: 1em;
       color: #cccccc;
       text-align: left;
     }
+
     tbody tr {
       transition: background-color 0.2s ease;
     }
+
     tbody tr:hover {
       background-color: #333;
     }
+
     tbody td {
       padding: 12px;
       font-size: 1em;
     }
+
     .rank-1 td {
       color: gold;
       font-weight: bold;
     }
+
     .rank-2 td {
       color: silver;
       font-weight: bold;
     }
+
     .rank-3 td {
-      color: #cd7f32; /* bronze-ish */
+      color: #cd7f32; /* bronze */
       font-weight: bold;
     }
   </style>
 </head>
 <body>
   <div class="leaderboard-container">
+
+    <!-- 🔹 TAB BAR ABOVE LEADERBOARD -->
+    <div class="tab-bar">
+      <button class="tab-button active">Overall</button>
+      <button class="tab-button">Weekly</button>
+      <button class="tab-button">Monthly</button>
+    </div>
+
     <div class="leaderboard-header">
       <h1>🏆 Top Kills</h1>
     </div>
+
     <table>
       <thead>
         <tr>
@@ -96,4 +148,5 @@
   </div>
 </body>
 </html>
+
 
