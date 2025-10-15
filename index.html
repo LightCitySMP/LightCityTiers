@@ -1,80 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Leaderboard</title>
-  <style>
-    body {
-      background-color: #121212;
-      font-family: Arial, sans-serif;
-      color: white;
-      margin: 0;
-      padding: 0;
-    }
-
-    .tab-bar {
-      display: flex;
-      justify-content: center;
-      background-color: #0d1117;
-      padding: 15px;
-    }
-
-    .tab-button {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 0.95em;
-      color: #bdbdbd;
-      background-color: #161b22;
-      border-radius: 10px 10px 0 0;
-      transition: all 0.2s ease;
-      border: none;
-    }
-
-    .tab-button.active {
-      color: #fff;
-      font-weight: bold;
-      background-color: #1e242d;
-    }
-
-    .tab-button img {
-      width: 24px;
-      height: 24px;
-      margin-bottom: 5px;
-    }
-
-    /* Leaderboard box placeholder */
-    .leaderboard {
-      max-width: 600px;
-      margin: 20px auto;
-      background: #1e1e1e;
-      padding: 20px;
-      border-radius: 10px;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LightCity SMP Leaderboards</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
 </head>
 <body>
 
-  <div class="tab-bar">
-    <button class="tab-button active">
-      <img src="https://cdn-icons-png.flaticon.com/512/616/616489.png" alt="trophy">
-      Overall
-    </button>
-  </div>
+  <header>
+    <nav>
+      <ul class="nav-tabs">
+        <li class="tab active" data-tab="overall">
+          <img src="https://cdn-icons-png.flaticon.com/512/2583/2583380.png" alt="trophy" />
+          <span>Overall Skill</span>
+        </li>
+        <li class="tab" data-tab="kills">
+          <img src="https://cdn-icons-png.flaticon.com/512/3124/3124536.png" alt="sword" />
+          <span>Kills</span>
+        </li>
+        <li class="tab" data-tab="playtime">
+          <img src="https://cdn-icons-png.flaticon.com/512/3649/3649460.png" alt="clock" />
+          <span>Playtime</span>
+        </li>
+      </ul>
+    </nav>
+  </header>
 
-  <div class="leaderboard">
-    <h2>Kills Leaderboard</h2>
-    <ol>
-      <li>Player1 - 120 kills</li>
-      <li>Player2 - 95 kills</li>
-      <li>Player3 - 70 kills</li>
-    </ol>
-  </div>
+  <main>
+    <section id="overall" class="tab-content active">
+      <h2>Overall Skill Leaderboard</h2>
+      <div class="leaderboard">
+        <div class="player-card first">
+          <span class="rank">1</span>
+          <img class="avatar" src="https://minotar.net/avatar/Player1/64" />
+          <div class="info">
+            <h3>Player1</h3>
+            <p>Skill Points: 405</p>
+          </div>
+        </div>
+
+        <div class="player-card second">
+          <span class="rank">2</span>
+          <img class="avatar" src="https://minotar.net/avatar/Player2/64" />
+          <div class="info">
+            <h3>Player2</h3>
+            <p>Skill Points: 330</p>
+          </div>
+        </div>
+
+        <div class="player-card third">
+          <span class="rank">3</span>
+          <img class="avatar" src="https://minotar.net/avatar/Player3/64" />
+          <div class="info">
+            <h3>Player3</h3>
+            <p>Skill Points: 290</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kills" class="tab-content">
+      <h2>Kills Leaderboard</h2>
+      <div class="leaderboard">
+        <div class="player-card first">
+          <span class="rank">1</span>
+          <img class="avatar" src="https://minotar.net/avatar/Player1/64" />
+          <div class="info">
+            <h3>Player1</h3>
+            <p>Kills: 120</p>
+          </div>
+        </div>
+
+        <div class="player-card second">
+          <span class="rank">2</span>
+          <img class="avatar" src="https://minotar.net/avatar/Player2/64" />
+          <div class="info">
+            <h3>Player2</h3>
+            <p>Kills: 95</p>
+          </div>
+        </div>
+
+        <div class="player-card third">
+          <span class="rank">3</span>
+          <img class="avatar" src="https://minotar.net/avatar/Player3/64" />
+          <div class="info">
+            <h3>Player3</h3>
+            <p>Kills: 70</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="playtime" class="tab-content">
+      <h2>Playtime Leaderboard</h2>
+      <div class="leaderboard">
+        <div class="player-card first">
+          <span class="rank">1</span>
+          <img class="avatar" src="https://minotar.net/avatar/Player1/64" />
+          <div class="info">
+            <h3>Player1</h3>
+            <p>Playtime: 142h</p>
+          </div>
+        </div>
+
+        <div class="player-card second">
+          <span class="rank">2</span>
+          <img class="avatar" src="https://minotar.net/avatar/Player2/64" />
+          <div class="info">
+            <h3>Player2</h3>
+            <p>Playtime: 120h</p>
+          </div>
+        </div>
+
+        <div class="player-card third">
+          <span class="rank">3</span>
+          <img class="avatar" src="https://minotar.net/avatar/Player3/64" />
+          <div class="info">
+            <h3>Player3</h3>
+            <p>Playtime: 100h</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
 </body>
 </html>
-
-
