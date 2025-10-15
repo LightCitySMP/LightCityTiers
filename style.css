@@ -1,18 +1,18 @@
-/* ========== RESET ========== */
+/* ======= RESET ======= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* ========== BODY ========== */
+/* ======= BODY ======= */
 body {
   font-family: "Poppins", sans-serif;
   background: #0e0e0e;
   color: #fff;
 }
 
-/* ========== TOP NAVBAR ========== */
+/* ======= TOP NAVBAR ======= */
 .topbar {
   background: #0f1115;
   height: 60px;
@@ -23,7 +23,7 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
-/* LOGO */
+/* Logo */
 .logo {
   font-family: "Poppins", sans-serif;
   font-size: 22px;
@@ -49,7 +49,7 @@ body {
   100% { background-position: 100%; }
 }
 
-/* NAV LINKS */
+/* Navbar Links */
 .nav-links {
   display: flex;
   align-items: center;
@@ -77,7 +77,7 @@ body {
   padding-bottom: 3px;
 }
 
-/* SEARCH BAR */
+/* Search Bar */
 .search-bar {
   background: #1a1c20;
   border-radius: 8px;
@@ -111,7 +111,7 @@ body {
   color: #fff;
 }
 
-/* ========== LEADERBOARD NAV TABS ========== */
+/* ======= LEADERBOARD NAV ======= */
 nav {
   background: #121418;
   display: flex;
@@ -148,11 +148,13 @@ nav {
 }
 
 .emoji {
-  font-size: 26px;
-  margin-bottom: 4px;
+  width: 28px;
+  height: 28px;
+  margin-bottom: 6px;
+  object-fit: contain;
 }
 
-/* ========== MAIN ========== */
+/* ======= MAIN ======= */
 main {
   max-width: 900px;
   margin: 40px auto;
@@ -182,7 +184,7 @@ h2 {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ========== PLAYER ROWS ========== */
+/* ======= PLAYER ROWS ======= */
 .player-row {
   display: flex;
   align-items: center;
@@ -245,15 +247,14 @@ h2 {
   color: #777;
 }
 
-/* RANK COLORS */
+/* Rank colors */
 .first .rank-box {
   background: linear-gradient(135deg, #ffd700, #ffea8a);
 }
-
 .second .rank-box {
   background: linear-gradient(135deg, #b8b8b8, #e6e6e6);
 }
-
 .third .rank-box {
   background: linear-gradient(135deg, #cd7f32, #ffb26b);
 }
+
