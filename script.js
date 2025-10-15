@@ -1,4 +1,4 @@
-// Handles tab switching & smooth fade animation
+// ====== TAB SWITCHING ======
 document.querySelectorAll(".tab").forEach(tab => {
   tab.addEventListener("click", () => {
     document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
@@ -9,7 +9,7 @@ document.querySelectorAll(".tab").forEach(tab => {
     const target = document.getElementById(targetId);
     target.classList.add("active");
 
-    // Simple fade animation
+    // Fade-in animation
     target.style.opacity = 0;
     setTimeout(() => {
       target.style.transition = "opacity 0.4s ease";
