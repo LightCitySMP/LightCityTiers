@@ -1,6 +1,20 @@
-/* ========== TOP NAVBAR (LightCityTiers) ========== */
+/* ========== RESET ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ========== BODY ========== */
+body {
+  font-family: "Poppins", sans-serif;
+  background: #0e0e0e;
+  color: #fff;
+}
+
+/* ========== TOP NAVBAR ========== */
 .topbar {
-  background: #0e1014;
+  background: #0f1115;
   height: 60px;
   display: flex;
   align-items: center;
@@ -9,11 +23,11 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
+/* LOGO */
 .logo {
   font-family: "Poppins", sans-serif;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 800;
-  letter-spacing: 1px;
   display: flex;
   align-items: center;
 }
@@ -27,7 +41,7 @@
 }
 
 .logo-solid {
-  color: #fefefe;
+  color: #f5f5f5;
 }
 
 @keyframes shine {
@@ -35,10 +49,11 @@
   100% { background-position: 100%; }
 }
 
+/* NAV LINKS */
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 25px;
 }
 
 .nav-links a {
@@ -59,17 +74,18 @@
 .nav-links a.active {
   color: #fff;
   border-bottom: 2px solid #f4c542;
-  padding-bottom: 4px;
+  padding-bottom: 3px;
 }
 
+/* SEARCH BAR */
 .search-bar {
-  background: #17191d;
-  border-radius: 10px;
-  padding: 6px 12px;
+  background: #1a1c20;
+  border-radius: 8px;
+  padding: 5px 12px;
   display: flex;
   align-items: center;
   gap: 8px;
-  box-shadow: inset 0 0 4px rgba(0,0,0,0.4);
+  border: 1px solid #2a2d32;
 }
 
 .search-bar input {
@@ -78,6 +94,7 @@
   outline: none;
   color: #fff;
   font-size: 14px;
+  width: 140px;
 }
 
 .search-bar input::placeholder {
@@ -85,7 +102,7 @@
 }
 
 .search-bar i {
-  color: #777;
+  color: #aaa;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -94,15 +111,7 @@
   color: #fff;
 }
 
-/* ========== BASE ========== */
-body {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: #0e0e0e;
-  color: #fff;
-}
-
-/* ========== NAVBAR TABS ========== */
+/* ========== LEADERBOARD NAV TABS ========== */
 nav {
   background: #121418;
   display: flex;
@@ -115,11 +124,9 @@ nav {
   list-style: none;
   display: flex;
   gap: 40px;
-  margin: 0;
-  padding: 0;
 }
 
-.nav-tabs .tab {
+.tab {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -130,7 +137,7 @@ nav {
   border-radius: 10px;
 }
 
-.nav-tabs .tab:hover {
+.tab:hover {
   background: #1c1f25;
   transform: translateY(-2px);
 }
@@ -175,7 +182,7 @@ h2 {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ========== PLAYER ROWS (MCTiers Style) ========== */
+/* ========== PLAYER ROWS ========== */
 .player-row {
   display: flex;
   align-items: center;
@@ -238,7 +245,7 @@ h2 {
   color: #777;
 }
 
-/* ========== RANK COLORS ========== */
+/* RANK COLORS */
 .first .rank-box {
   background: linear-gradient(135deg, #ffd700, #ffea8a);
 }
