@@ -123,7 +123,7 @@ nav {
 .nav-tabs {
   list-style: none;
   display: flex;
-  gap: 40px;
+  gap: 60px;
 }
 
 .tab {
@@ -147,11 +147,18 @@ nav {
   color: #fff;
 }
 
+/* Default Emoji Size */
 .emoji {
-  width: 28px;
-  height: 28px;
+  width: 52px;
+  height: 52px;
   margin-bottom: 6px;
   object-fit: contain;
+}
+
+/* Slightly Larger Sword Icon */
+.tab[data-tab="kills"] .emoji {
+  width: 60px;
+  height: 60px;
 }
 
 /* ======= MAIN ======= */
@@ -257,4 +264,3 @@ h2 {
 .third .rank-box {
   background: linear-gradient(135deg, #cd7f32, #ffb26b);
 }
-
