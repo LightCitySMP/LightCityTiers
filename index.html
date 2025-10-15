@@ -9,123 +9,128 @@
 </head>
 <body>
 
-<header>
-  <nav>
-    <ul class="nav-tabs">
-      <li class="tab active" data-tab="overall">
-        <span class="emoji">🏆</span>
-        <span>Overall Skill</span>
-      </li>
-      <li class="tab" data-tab="kills">
-        <span class="emoji">⚔️</span>
-        <span>Kills</span>
-      </li>
-      <li class="tab" data-tab="playtime">
-        <span class="emoji">⌚</span>
-        <span>Playtime</span>
-      </li>
-    </ul>
-  </nav>
-</header>
-
+  <header>
+    <nav>
+      <ul class="nav-tabs">
+        <li class="tab active" data-tab="overall">
+          <span class="emoji">🏆</span>
+          <span>Overall Skill</span>
+        </li>
+        <li class="tab" data-tab="kills">
+          <span class="emoji">⚔️</span>
+          <span>Kills</span>
+        </li>
+        <li class="tab" data-tab="playtime">
+          <span class="emoji">⌚</span>
+          <span>Playtime</span>
+        </li>
+      </ul>
+    </nav>
+  </header>
 
   <main>
-    <!-- Overall Skill Leaderboard -->
+    <!-- ================= Overall Skill ================= -->
     <section id="overall" class="tab-content active">
       <h2>Overall Skill Leaderboard</h2>
       <div class="leaderboard">
-        <div class="player-card first">
-          <span class="rank">1</span>
+
+        <div class="player-row first">
+          <div class="rank-box"><span class="rank-number">1.</span></div>
           <img class="avatar" src="https://minotar.net/avatar/Player1/64" />
-          <div class="info">
-            <h3>Player1</h3>
-            <p>Skill Points: 405</p>
+          <div class="player-info">
+            <h3 class="player-name">Player1</h3>
+            <p class="player-title">🏆 Combat Grandmaster <span class="points">(405 points)</span></p>
           </div>
         </div>
 
-        <div class="player-card second">
-          <span class="rank">2</span>
+        <div class="player-row second">
+          <div class="rank-box"><span class="rank-number">2.</span></div>
           <img class="avatar" src="https://minotar.net/avatar/Player2/64" />
-          <div class="info">
-            <h3>Player2</h3>
-            <p>Skill Points: 330</p>
+          <div class="player-info">
+            <h3 class="player-name">Player2</h3>
+            <p class="player-title">⚔️ Combat Master <span class="points">(330 points)</span></p>
           </div>
         </div>
 
-        <div class="player-card third">
-          <span class="rank">3</span>
+        <div class="player-row third">
+          <div class="rank-box"><span class="rank-number">3.</span></div>
           <img class="avatar" src="https://minotar.net/avatar/Player3/64" />
-          <div class="info">
-            <h3>Player3</h3>
-            <p>Skill Points: 290</p>
+          <div class="player-info">
+            <h3 class="player-name">Player3</h3>
+            <p class="player-title">⚔️ Combat Master <span class="points">(290 points)</span></p>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- Kills Leaderboard -->
+    <!-- ================= Kills ================= -->
     <section id="kills" class="tab-content">
       <h2>Kills Leaderboard</h2>
       <div class="leaderboard">
-        <div class="player-card first">
-          <span class="rank">1</span>
+
+        <div class="player-row first">
+          <div class="rank-box"><span class="rank-number">1.</span></div>
           <img class="avatar" src="https://minotar.net/avatar/Player1/64" />
-          <div class="info">
-            <h3>Player1</h3>
-            <p>Kills: 120</p>
+          <div class="player-info">
+            <h3 class="player-name">Player1</h3>
+            <p class="player-title">⚔️ 120 Kills</p>
           </div>
         </div>
 
-        <div class="player-card second">
-          <span class="rank">2</span>
+        <div class="player-row second">
+          <div class="rank-box"><span class="rank-number">2.</span></div>
           <img class="avatar" src="https://minotar.net/avatar/Player2/64" />
-          <div class="info">
-            <h3>Player2</h3>
-            <p>Kills: 95</p>
+          <div class="player-info">
+            <h3 class="player-name">Player2</h3>
+            <p class="player-title">⚔️ 95 Kills</p>
           </div>
         </div>
 
-        <div class="player-card third">
-          <span class="rank">3</span>
+        <div class="player-row third">
+          <div class="rank-box"><span class="rank-number">3.</span></div>
           <img class="avatar" src="https://minotar.net/avatar/Player3/64" />
-          <div class="info">
-            <h3>Player3</h3>
-            <p>Kills: 70</p>
+          <div class="player-info">
+            <h3 class="player-name">Player3</h3>
+            <p class="player-title">⚔️ 70 Kills</p>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- Playtime Leaderboard -->
+    <!-- ================= Playtime ================= -->
     <section id="playtime" class="tab-content">
       <h2>Playtime Leaderboard</h2>
       <div class="leaderboard">
-        <div class="player-card first">
-          <span class="rank">1</span>
+
+        <div class="player-row first">
+          <div class="rank-box"><span class="rank-number">1.</span></div>
           <img class="avatar" src="https://minotar.net/avatar/Player1/64" />
-          <div class="info">
-            <h3>Player1</h3>
-            <p>Playtime: 142h</p>
+          <div class="player-info">
+            <h3 class="player-name">Player1</h3>
+            <p class="player-title">⌚ 142h Playtime</p>
           </div>
         </div>
 
-        <div class="player-card second">
-          <span class="rank">2</span>
+        <div class="player-row second">
+          <div class="rank-box"><span class="rank-number">2.</span></div>
           <img class="avatar" src="https://minotar.net/avatar/Player2/64" />
-          <div class="info">
-            <h3>Player2</h3>
-            <p>Playtime: 120h</p>
+          <div class="player-info">
+            <h3 class="player-name">Player2</h3>
+            <p class="player-title">⌚ 120h Playtime</p>
           </div>
         </div>
 
-        <div class="player-card third">
-          <span class="rank">3</span>
+        <div class="player-row third">
+          <div class="rank-box"><span class="rank-number">3.</span></div>
           <img class="avatar" src="https://minotar.net/avatar/Player3/64" />
-          <div class="info">
-            <h3>Player3</h3>
-            <p>Playtime: 100h</p>
+          <div class="player-info">
+            <h3 class="player-name">Player3</h3>
+            <p class="player-title">⌚ 100h Playtime</p>
           </div>
         </div>
+
       </div>
     </section>
   </main>
