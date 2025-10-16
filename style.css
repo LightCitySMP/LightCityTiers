@@ -1,162 +1,163 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
 body {
-  font-family: 'Poppins', sans-serif;
   margin: 0;
-  background: #0e0e0e;
+  font-family: "Poppins", sans-serif;
+  background-color: #0f0f0f;
   color: #fff;
 }
 
-/* HEADER */
-header {
+/* Navbar */
+.navbar {
+  background-color: #111216;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #101216;
   padding: 15px 40px;
-  border-bottom: 2px solid #222;
 }
 
 .logo {
-  font-size: 22px;
   font-weight: 700;
-  color: #ffb703;
+  font-size: 1.6rem;
+  color: #ffb300;
 }
+
 .logo span {
-  color: white;
+  color: #fff;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
 }
 
 nav a {
   text-decoration: none;
-  color: #aaa;
-  margin-right: 25px;
-  transition: 0.3s;
+  color: #bbb;
   font-weight: 500;
-}
-nav a:hover,
-nav a.active {
-  color: #ffb703;
-  border-bottom: 2px solid #ffb703;
+  transition: color 0.2s, border-bottom 0.2s;
 }
 
-.search {
-  display: flex;
-  background: #1a1a1a;
-  padding: 5px 10px;
-  border-radius: 8px;
+nav a.active, nav a:hover {
+  color: #ffb300;
+  border-bottom: 2px solid #ffb300;
+  padding-bottom: 4px;
 }
-.search input {
+
+/* Search bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input {
+  padding: 6px 10px;
+  border-radius: 6px;
   border: none;
-  background: none;
-  color: white;
   outline: none;
   font-size: 14px;
 }
-.search button {
+
+.search-bar button {
   background: none;
   border: none;
-  color: #ffb703;
+  color: #fff;
+  font-size: 18px;
+  margin-left: 5px;
   cursor: pointer;
 }
 
-/* CATEGORY TABS */
-.tabs {
+/* Categories */
+.categories {
   display: flex;
   justify-content: center;
-  gap: 80px;
-  background: #111317;
-  padding: 30px;
-  border-bottom: 2px solid #222;
+  gap: 120px;
+  background-color: #141518;
+  padding: 40px 0;
 }
 
-.tab {
+.category {
   text-align: center;
   cursor: pointer;
-  color: #a5a5a5;
-  transition: 0.3s;
-}
-.tab img {
-  width: 50px;
-  height: 50px;
-  margin-bottom: 5px;
-}
-.tab.active {
-  color: #ffb703;
-}
-.tab:hover {
-  color: #ffb703;
+  transition: transform 0.3s;
 }
 
-/* LEADERBOARDS */
-.leaderboard {
-  display: none;
-  max-width: 800px;
-  margin: 40px auto;
-  background: #141414;
+.category img {
+  width: 90px;
+  height: 90px;
+  transition: transform 0.2s;
+}
+
+.category:hover img {
+  transform: scale(1.1);
+}
+
+.category.active span {
+  color: #ffb300;
+  border-bottom: 2px solid #ffb300;
+}
+
+/* Leaderboard */
+#leaderboard {
+  width: 80%;
+  margin: 60px auto;
+  background: #141518;
   border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
-}
-.leaderboard.active {
-  display: block;
+  padding: 20px 40px;
+  box-shadow: 0 0 10px #000;
 }
 
-.leaderboard h2 {
-  border-left: 5px solid #ffb703;
+#leaderboard h2 {
+  border-left: 5px solid #ffb300;
   padding-left: 10px;
-  margin-bottom: 20px;
-}
-
-.list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  color: #fff;
 }
 
 .player {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  background: #1a1a1a;
-  border-radius: 8px;
-  padding: 12px 15px;
+  background: #1b1c20;
+  margin: 15px 0;
+  padding: 15px 25px;
+  border-radius: 10px;
+  transition: transform 0.2s;
 }
 
-.player-left {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.player-left img {
-  width: 42px;
-  height: 42px;
-  border-radius: 6px;
+.player:hover {
+  transform: scale(1.02);
 }
 
 .rank {
-  font-weight: 700;
-  font-size: 18px;
-  width: 30px;
-  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  background-color: #333;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 10px;
 }
-.rank.gold { color: #FFD700; }
-.rank.silver { color: #C0C0C0; }
-.rank.bronze { color: #CD7F32; }
+
+.rank.gold { background-color: #ffb300; color: #000; }
+.rank.silver { background-color: #c0c0c0; color: #000; }
+.rank.bronze { background-color: #cd7f32; color: #000; }
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
 
 .name {
   font-weight: 600;
-  color: white;
 }
 
-.score {
-  color: #a5a5a5;
-  font-size: 14px;
-}
-
-.no-results {
-  text-align: center;
-  color: #777;
-  padding: 20px;
+.points {
+  color: #ffb300;
 }
 
