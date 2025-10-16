@@ -1,155 +1,161 @@
-/* ========== GLOBAL THEME ========== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
 body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
   background-color: #0e0e0e;
-  color: white;
-  font-family: "Poppins", sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-h2 {
-  font-weight: 700;
-  font-size: 24px;
-  color: white;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* ========== LEADERBOARD CONTAINER ========== */
-.leaderboard-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 40px;
-}
-
-.leaderboard {
-  background-color: #141414;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.4);
-  width: 70%;
-  padding: 25px;
-}
-
-.tab-buttons {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 25px;
-}
-
-.tab {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 30px;
-  cursor: pointer;
-  color: #9ca3af;
-  transition: 0.3s;
-}
-
-.tab img {
-  width: 55px;
-  height: 55px;
-  margin-bottom: 8px;
-}
-
-.tab.active {
-  color: #ffb703;
-}
-
-.tab.active::after {
-  content: "";
-  width: 50%;
-  height: 2px;
-  background-color: #ffb703;
-  margin-top: 5px;
-  border-radius: 2px;
-}
-
-/* ========== PLAYER ROWS ========== */
-.player-row {
-  display: flex;
-  align-items: center;
-  background-color: #1b1d20;
-  border-radius: 10px;
-  margin-bottom: 12px;
-  padding: 12px 18px;
-  transition: 0.2s;
-}
-
-.player-row:hover {
-  background-color: #212428;
-}
-
-.rank-box {
-  background: #ffb703;
-  border-radius: 8px;
-  color: #000;
-  font-weight: 700;
-  width: 42px;
-  height: 42px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 16px;
-  font-size: 18px;
-}
-
-/* Avatar next to name */
-.avatar {
-  width: 52px;
-  height: 52px;
-  border-radius: 8px;
-  margin-right: 18px;
-  border: 2px solid #2a2d32;
-  object-fit: cover;
-}
-
-/* Player info */
-.player-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.player-name {
-  font-weight: 600;
-  font-size: 17px;
-  margin: 0;
   color: #fff;
 }
 
-.player-title {
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #101216;
+  padding: 15px 40px;
+  border-bottom: 2px solid #222;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffb703;
+}
+.logo span {
+  color: white;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  gap: 25px;
+}
+nav ul li a {
+  color: #a5a5a5;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+nav ul li a:hover,
+nav ul li a.active {
+  color: #ffb703;
+  border-bottom: 2px solid #ffb703;
+  padding-bottom: 2px;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  background: #1a1a1a;
+  border-radius: 8px;
+  padding: 5px 10px;
+}
+.search input {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #fff;
   font-size: 14px;
-  margin: 3px 0 0;
-  color: #9ca3af;
+}
+.search button {
+  background: none;
+  border: none;
+  color: #ffb703;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-/* ========== TOP 3 COLORS ========== */
-.first .rank-box {
-  background: linear-gradient(90deg, #ffb703, #ffcc4d);
-  color: #000;
+/* TABS */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  padding: 30px;
+  background-color: #111317;
+  border-bottom: 2px solid #222;
 }
-.second .rank-box {
-  background: linear-gradient(90deg, #d4d4d4, #f1f1f1);
-  color: #000;
+.tab {
+  text-align: center;
+  cursor: pointer;
+  color: #a5a5a5;
+  transition: 0.3s;
 }
-.third .rank-box {
-  background: linear-gradient(90deg, #cd7f32, #e89b5a);
-  color: #000;
+.tab img {
+  width: 48px;
+  height: 48px;
+}
+.tab.active {
+  color: #ffb703;
+}
+.tab.active img {
+  transform: scale(1.1);
+}
+.tab:hover {
+  color: #ffb703;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .leaderboard {
-    width: 90%;
-  }
-  .tab img {
-    width: 40px;
-    height: 40px;
-  }
+/* LEADERBOARDS */
+.leaderboard {
+  display: none;
+  max-width: 800px;
+  margin: 40px auto;
+  background: #141414;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
 }
+.leaderboard.active {
+  display: block;
+}
+
+.leaderboard h2 {
+  border-left: 5px solid #ffb703;
+  padding-left: 10px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.leaderboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.player {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1a1a1a;
+  padding: 12px 15px;
+  border-radius: 8px;
+}
+.player-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.player-left img {
+  width: 42px;
+  height: 42px;
+  border-radius: 6px;
+}
+.rank {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffb703;
+  width: 25px;
+}
+.name {
+  font-weight: 600;
+  color: white;
+}
+.score {
+  color: #a5a5a5;
+  font-size: 14px;
+}
+
 
 .rank-number {
   font-size: 24px;
