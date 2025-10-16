@@ -81,13 +81,12 @@ nav a.active, nav a:hover {
   transition: transform 0.3s;
 }
 
-.category img {
-  width: 90px;
-  height: 90px;
+.icon {
+  font-size: 70px;
   transition: transform 0.2s;
 }
 
-.category:hover img {
+.category:hover .icon {
   transform: scale(1.1);
 }
 
