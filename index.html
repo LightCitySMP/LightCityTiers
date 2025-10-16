@@ -4,58 +4,59 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LightCityTiers</title>
-
-  <!-- Font Awesome for icons -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-  />
-
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Bogle&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
     <div class="navbar">
-      <div class="logo">
-        <span class="gold">LightCity</span><span class="white">Tiers</span>
-      </div>
-
+      <div class="logo">LightCity<span>Tiers</span></div>
       <nav>
-        <ul>
-          <li><a href="#" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
-          <li><a href="#"><i class="fa-brands fa-discord"></i> Discord</a></li>
-        </ul>
+        <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
+        <a href="#"><i class="fab fa-discord"></i> Discord</a>
       </nav>
-
       <div class="search-bar">
         <input type="text" id="searchInput" placeholder="Search player..." />
-        <button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button><i class="fas fa-search"></i></button>
       </div>
     </div>
   </header>
 
-  <section class="categories">
-    <div class="category active" data-category="skill">
-      <div class="icon">🏆</div>
+  <section class="category-panel">
+    <div class="category active" data-tab="overall">
+      <img src="https://cdn-icons-png.flaticon.com/512/616/616489.png" alt="Trophy">
       <span>Overall Skill</span>
     </div>
-    <div class="category" data-category="kills">
-      <div class="icon">⚔️</div>
+    <div class="category" data-tab="kills">
+      <img src="https://cdn-icons-png.flaticon.com/512/1077/1077012.png" alt="Sword">
       <span>Kills</span>
     </div>
-    <div class="category" data-category="playtime">
-      <div class="icon">⌚</div>
+    <div class="category" data-tab="playtime">
+      <img src="https://cdn-icons-png.flaticon.com/512/2088/2088617.png" alt="Clock">
       <span>Playtime</span>
     </div>
   </section>
 
   <main>
-    <div id="leaderboard">
-      <h2><span id="categoryTitle">🏆 Overall Skill</span> Leaderboard</h2>
-      <div id="playersList"></div>
-    </div>
+    <section id="overall" class="leaderboard active">
+      <h2>🏆 Overall Skill Leaderboard</h2>
+      <div class="players" id="overallList"></div>
+    </section>
+
+    <section id="kills" class="leaderboard">
+      <h2>⚔️ Kills Leaderboard</h2>
+      <div class="players" id="killsList"></div>
+    </section>
+
+    <section id="playtime" class="leaderboard">
+      <h2>⌚ Playtime Leaderboard</h2>
+      <div class="players" id="playtimeList"></div>
+    </section>
   </main>
+
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
 
