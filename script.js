@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sections = document.querySelectorAll(".leaderboard");
   const searchInput = document.getElementById("searchInput");
 
-  // Category Switching
+  // Switch between categories
   categories.forEach(cat => {
     cat.addEventListener("click", () => {
       categories.forEach(c => c.classList.remove("active"));
@@ -13,16 +13,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Fetch and render stats.json
+  // Load stats.json
   fetch("stats.json")
     .then(res => res.json())
     .then(players => {
-      const overallList = document.getElementById("overallList");
-      const killsList = document.getElementById("killsList");
-      const playtimeList = document.getElementById("playtimeList");
+      renderLeaderboard(players, "overallList", "skill", "🏆 skill points");
+      renderLeaderboard(players, "killsList", "kills", "⚔️ kills");
+      renderLeaderboard(players, "playtimeList", "playtime", "⌚ hours");
+    })
+    .catch(err => console.error("Error loading stats:", err));
 
-      players.sort((a, b) => b.skill - a.skill);
-      players.forEach((p, i) => {
+  function renderLeaderboard(players, listId, statKey, label) {
+    const list = document.getElementById(listId);
+    list.innerHTML = "";
+    players
+      .sort((a, b) => b[statKey] - a[statKey])
+      .forEach((p, i) => {
         const card = document.createElement("div");
         card.className = "player-card";
         card.innerHTML = `
@@ -30,14 +36,14 @@ document.addEventListener("DOMContentLoaded", () => {
           <img src="${p.avatar}" alt="${p.name}">
           <div class="info">
             <h3>${p.name}</h3>
-            <p>🏆 ${p.skill} skill points</p>
+            <p>${label.replace(statKey, p[statKey])}</p>
           </div>
         `;
-        overallList.appendChild(card);
+        list.appendChild(card);
       });
-    });
+  }
 
-  // Search Functionality
+  // Search player
   searchInput.addEventListener("input", () => {
     const value = searchInput.value.toLowerCase();
     document.querySelectorAll(".player-card").forEach(card => {
@@ -46,4 +52,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
 
