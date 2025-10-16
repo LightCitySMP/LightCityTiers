@@ -50,7 +50,7 @@
     }
     .player-list {
       margin-top: 25px;
-      max-width: 600px;
+      max-width: 650px;
       margin-left: auto;
       margin-right: auto;
       background: #17191d;
@@ -71,6 +71,12 @@
     .player-row span {
       font-weight: 500;
     }
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
   </style>
 </head>
 <body>
@@ -86,6 +92,11 @@
     <button type="submit">Add Player</button>
   </form>
 
+  <div class="buttons">
+    <button id="saveBtn">💾 Save Stats</button>
+    <button id="clearBtn">🗑️ Clear List</button>
+  </div>
+
   <div class="player-list" id="playerList">
     <h3>🧾 Players Added</h3>
   </div>
@@ -93,33 +104,66 @@
   <script>
     const form = document.getElementById("playerForm");
     const list = document.getElementById("playerList");
-    const players = [];
+    const saveBtn = document.getElementById("saveBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    let players = [];
 
+    // Add Player
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const username = document.getElementById("username").value.trim();
       const category = document.getElementById("category").value;
       const value = parseInt(document.getElementById("value").value);
 
-      if (!username || !value) return alert("Fill all fields!");
+      if (!username || isNaN(value)) return alert("Fill all fields!");
 
-      players.push({ username, category, value });
+      let existing = players.find(p => p.name === username);
+      if (existing) {
+        existing[category] = value;
+      } else {
+        players.push({
+          name: username,
+          skill: category === "skill" ? value : 0,
+          kills: category === "kills" ? value : 0,
+          playtime: category === "playtime" ? value : 0
+        });
+      }
 
       renderPlayers();
-
-      // Reset inputs
-      document.getElementById("username").value = "";
-      document.getElementById("value").value = "";
+      form.reset();
     });
 
+    // Render Players
     function renderPlayers() {
       list.innerHTML = `<h3>🧾 Players Added</h3>` + players.map(p => `
         <div class="player-row">
-          <span>${p.username}</span>
-          <span>${p.category === "skill" ? "🏆" : p.category === "kills" ? "⚔️" : "⌚"} ${p.value}</span>
+          <span>${p.name}</span>
+          <span>
+            🏆 ${p.skill} | ⚔️ ${p.kills} | ⌚ ${p.playtime}
+          </span>
         </div>
       `).join("");
     }
+
+    // Save to file
+    saveBtn.addEventListener("click", () => {
+      if (players.length === 0) return alert("No players added yet!");
+      const blob = new Blob([JSON.stringify(players, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "stats.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // Clear List
+    clearBtn.addEventListener("click", () => {
+      if (confirm("Clear all players?")) {
+        players = [];
+        renderPlayers();
+      }
+    });
   </script>
 </body>
 </html>
