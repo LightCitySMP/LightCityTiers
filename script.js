@@ -18,7 +18,7 @@ function renderLeaderboard(category) {
       ? "🏆 Overall Skill"
       : category === "kills"
       ? "⚔️ Kills"
-      : "⏰ Playtime";
+      : "⌚ Playtime";
 
   let sorted = [...playersData].sort(
     (a, b) => b[category] - a[category]
@@ -35,13 +35,13 @@ function renderLeaderboard(category) {
           <img class="avatar" src="${p.avatar}" alt="${p.name}">
           <div class="name">${p.name}</div>
         </div>
-        <div class="points">🏆 ${p[category]} ${
-        category === "skill"
-          ? "skill points"
-          : category === "kills"
-          ? "kills"
-          : "hours"
-      }</div>
+        <div class="points">${
+          category === "skill"
+            ? "🏆 " + p.skill + " skill points"
+            : category === "kills"
+            ? "⚔️ " + p.kills + " kills"
+            : "⌚ " + p.playtime + " hours"
+        }</div>
       </div>`;
     })
     .join("");
@@ -86,5 +86,4 @@ function searchPlayer() {
     alert("Player not found!");
   }
 }
-
 
