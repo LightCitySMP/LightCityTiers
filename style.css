@@ -13,7 +13,7 @@ body {
   align-items: center;
   padding: 15px 40px;
   margin: 20px;
-  border-radius: 16px; /* Rounded corners */
+  border-radius: 16px;
   box-shadow: 0 0 12px rgba(255, 179, 0, 0.2);
 }
 
@@ -21,9 +21,16 @@ body {
   font-weight: 700;
   font-size: 1.7rem;
 }
-.gold { color: #ffb300; }
-.white { color: #fff; }
 
+.gold {
+  color: #ffb300;
+}
+
+.white {
+  color: #fff;
+}
+
+/* Navigation */
 nav ul {
   list-style: none;
   display: flex;
@@ -46,7 +53,8 @@ nav a i {
   font-size: 17px;
 }
 
-nav a.active, nav a:hover {
+nav a.active,
+nav a:hover {
   color: #ffb300;
   border-bottom: 2px solid #ffb300;
   padding-bottom: 4px;
@@ -134,5 +142,59 @@ nav a.active, nav a:hover {
 
 .player {
   display: flex;
-  align-it
+  align-items: center;
+  justify-content: space-between;
+  background: #1b1c20;
+  margin: 15px 0;
+  padding: 15px 25px;
+  border-radius: 10px;
+  transition: transform 0.2s;
+}
+
+.player:hover {
+  transform: scale(1.02);
+}
+
+.rank {
+  font-weight: bold;
+  font-size: 1.2rem;
+  background-color: #333;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 10px;
+}
+
+.rank.gold {
+  background-color: #ffb300;
+  color: #000;
+}
+.rank.silver {
+  background-color: #c0c0c0;
+  color: #000;
+}
+.rank.bronze {
+  background-color: #cd7f32;
+  color: #000;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.name {
+  font-weight: 600;
+}
+
+.points {
+  color: #ffb300;
+}
 
