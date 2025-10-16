@@ -1,62 +1,90 @@
-let allPlayers = [];
+let playersData = [];
 
-document.querySelectorAll(".tab").forEach(tab => {
-  tab.addEventListener("click", () => {
-    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-    document.querySelectorAll(".leaderboard").forEach(lb => lb.classList.remove("active"));
-    tab.classList.add("active");
-    document.getElementById(tab.dataset.tab).classList.add("active");
-  });
-});
-
+// Load stats.json
 fetch("stats.json")
-  .then(res => res.json())
+  .then(response => response.json())
   .then(data => {
-    allPlayers = data;
-    renderBoards(data);
-  })
-  .catch(err => console.error("Error loading stats:", err));
+    playersData = data;
+    renderLeaderboard("skill");
+  });
 
-function renderBoards(players) {
-  const cats = ["skill", "kills", "playtime"];
-  const ids = ["overallList", "killsList", "playtimeList"];
+// Render leaderboard
+function renderLeaderboard(category) {
+  const container = document.getElementById("playersList");
+  const title = document.getElementById("categoryTitle");
 
-  cats.forEach((c, i) => {
-    const div = document.getElementById(ids[i]);
-    const sorted = [...players].sort((a, b) => b[c] - a[c]);
-    if (sorted.length === 0) {
-      div.innerHTML = `<div class="no-results">No players found</div>`;
-      return;
-    }
+  title.textContent =
+    category === "skill"
+      ? "🏆 Overall Skill"
+      : category === "kills"
+      ? "⚔️ Kills"
+      : "⏰ Playtime";
 
-    div.innerHTML = sorted.map((p, index) => `
+  let sorted = [...playersData].sort(
+    (a, b) => b[category] - a[category]
+  );
+
+  container.innerHTML = sorted
+    .map((p, i) => {
+      let rankClass =
+        i === 0 ? "gold" : i === 1 ? "silver" : i === 2 ? "bronze" : "";
+      return `
       <div class="player">
-        <div class="player-left">
-          <div class="rank ${index === 0 ? 'gold' : index === 1 ? 'silver' : index === 2 ? 'bronze' : ''}">${index + 1}.</div>
-          <img src="${p.avatar}" alt="${p.name}">
+        <div class="details">
+          <div class="rank ${rankClass}">${i + 1}.</div>
+          <img class="avatar" src="${p.avatar}" alt="${p.name}">
           <div class="name">${p.name}</div>
         </div>
-        <div class="score">
-          ${c === "skill" ? `🏆 ${p.skill} skill points` :
-            c === "kills" ? `⚔️ ${p.kills} kills` :
-            `⌚ ${p.playtime} hours`}
-        </div>
-      </div>
-    `).join("");
-  });
+        <div class="points">🏆 ${p[category]} ${
+        category === "skill"
+          ? "skill points"
+          : category === "kills"
+          ? "kills"
+          : "hours"
+      }</div>
+      </div>`;
+    })
+    .join("");
 }
 
-// SEARCH PLAYER
-document.getElementById("searchBtn").addEventListener("click", doSearch);
-document.getElementById("searchInput").addEventListener("keypress", e => {
-  if (e.key === "Enter") doSearch();
+// Category switching
+document.querySelectorAll(".category").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".category").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+    renderLeaderboard(tab.getAttribute("data-category"));
+  });
 });
 
-function doSearch() {
+// Search functionality
+document.getElementById("searchBtn").addEventListener("click", searchPlayer);
+document.getElementById("searchInput").addEventListener("keypress", e => {
+  if (e.key === "Enter") searchPlayer();
+});
+
+function searchPlayer() {
   const query = document.getElementById("searchInput").value.toLowerCase();
-  if (!query) { renderBoards(allPlayers); return; }
-  const filtered = allPlayers.filter(p => p.name.toLowerCase().includes(query));
-  renderBoards(filtered);
+  const results = playersData.filter(p =>
+    p.name.toLowerCase().includes(query)
+  );
+
+  if (results.length > 0) {
+    const container = document.getElementById("playersList");
+    container.innerHTML = results
+      .map((p, i) => `
+        <div class="player">
+          <div class="details">
+            <div class="rank">${i + 1}.</div>
+            <img class="avatar" src="${p.avatar}" alt="${p.name}">
+            <div class="name">${p.name}</div>
+          </div>
+          <div class="points">🏆 ${p.skill} skill points</div>
+        </div>
+      `)
+      .join("");
+  } else {
+    alert("Player not found!");
+  }
 }
 
 
