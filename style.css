@@ -29,6 +29,11 @@ nav a {
   text-decoration: none;
   color: #bbb;
   font-weight: 600;
+  transition: color 0.3s;
+}
+
+nav a i {
+  margin-right: 5px;
 }
 
 nav a.active,
@@ -73,8 +78,8 @@ nav a:hover {
   transition: transform 0.3s ease;
 }
 
-.category img {
-  width: 70px;
+.category .icon {
+  font-size: 50px;
   transition: transform 0.3s ease;
 }
 
@@ -85,7 +90,7 @@ nav a:hover {
   transition: color 0.3s, text-shadow 0.3s;
 }
 
-.category:hover img {
+.category:hover .icon {
   transform: scale(1.1);
 }
 
@@ -175,4 +180,3 @@ nav a:hover {
   color: #bbb;
   font-size: 14px;
 }
-
