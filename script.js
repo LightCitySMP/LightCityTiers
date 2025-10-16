@@ -17,13 +17,13 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("stats.json")
     .then(res => res.json())
     .then(players => {
-      renderLeaderboard(players, "overallList", "skill", "🏆 skill points");
-      renderLeaderboard(players, "killsList", "kills", "⚔️ kills");
-      renderLeaderboard(players, "playtimeList", "playtime", "⌚ hours");
+      renderLeaderboard(players, "overallList", "skill", "🏆");
+      renderLeaderboard(players, "killsList", "kills", "⚔️");
+      renderLeaderboard(players, "playtimeList", "playtime", "🕰️");
     })
     .catch(err => console.error("Error loading stats:", err));
 
-  function renderLeaderboard(players, listId, statKey, label) {
+  function renderLeaderboard(players, listId, statKey, icon) {
     const list = document.getElementById(listId);
     list.innerHTML = "";
     players
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <img src="${p.avatar}" alt="${p.name}">
           <div class="info">
             <h3>${p.name}</h3>
-            <p>${label.replace(statKey, p[statKey])}</p>
+            <p>${icon} ${p[statKey]} ${statKey}</p>
           </div>
         `;
         list.appendChild(card);
