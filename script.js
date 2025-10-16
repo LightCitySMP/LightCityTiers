@@ -1,4 +1,5 @@
-// Tab switching
+let allPlayers = [];
+
 document.querySelectorAll(".tab").forEach(tab => {
   tab.addEventListener("click", () => {
     document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
@@ -8,43 +9,36 @@ document.querySelectorAll(".tab").forEach(tab => {
   });
 });
 
-// Load stats.json
-let allPlayers = [];
-
 fetch("stats.json")
   .then(res => res.json())
   .then(data => {
     allPlayers = data;
-    updateLeaderboards(data);
+    renderBoards(data);
   })
-  .catch(err => console.error("Error loading stats.json:", err));
+  .catch(err => console.error("Error loading stats:", err));
 
-// Update leaderboards
-function updateLeaderboards(players) {
-  const categories = ["skill", "kills", "playtime"];
+function renderBoards(players) {
+  const cats = ["skill", "kills", "playtime"];
   const ids = ["overallList", "killsList", "playtimeList"];
 
-  categories.forEach((cat, i) => {
-    const list = document.getElementById(ids[i]);
-    const sorted = [...players].sort((a, b) => b[cat] - a[cat]);
-
+  cats.forEach((c, i) => {
+    const div = document.getElementById(ids[i]);
+    const sorted = [...players].sort((a, b) => b[c] - a[c]);
     if (sorted.length === 0) {
-      list.innerHTML = `<div class="no-results">No players found</div>`;
+      div.innerHTML = `<div class="no-results">No players found</div>`;
       return;
     }
 
-    list.innerHTML = sorted.map((p, index) => `
+    div.innerHTML = sorted.map((p, index) => `
       <div class="player">
         <div class="player-left">
-          <div class="rank ${index === 0 ? 'gold' : index === 1 ? 'silver' : index === 2 ? 'bronze' : ''}">
-            ${index + 1}.
-          </div>
+          <div class="rank ${index === 0 ? 'gold' : index === 1 ? 'silver' : index === 2 ? 'bronze' : ''}">${index + 1}.</div>
           <img src="${p.avatar}" alt="${p.name}">
           <div class="name">${p.name}</div>
         </div>
         <div class="score">
-          ${cat === "skill" ? `🏆 ${p.skill} skill points` :
-            cat === "kills" ? `⚔️ ${p.kills} kills` :
+          ${c === "skill" ? `🏆 ${p.skill} skill points` :
+            c === "kills" ? `⚔️ ${p.kills} kills` :
             `⌚ ${p.playtime} hours`}
         </div>
       </div>
@@ -52,21 +46,17 @@ function updateLeaderboards(players) {
   });
 }
 
-// Search player
-document.getElementById("searchBtn").addEventListener("click", searchPlayer);
-document.getElementById("searchInput").addEventListener("keypress", (e) => {
-  if (e.key === "Enter") searchPlayer();
+// SEARCH PLAYER
+document.getElementById("searchBtn").addEventListener("click", doSearch);
+document.getElementById("searchInput").addEventListener("keypress", e => {
+  if (e.key === "Enter") doSearch();
 });
 
-function searchPlayer() {
+function doSearch() {
   const query = document.getElementById("searchInput").value.toLowerCase();
-  if (!query) {
-    updateLeaderboards(allPlayers);
-    return;
-  }
-
+  if (!query) { renderBoards(allPlayers); return; }
   const filtered = allPlayers.filter(p => p.name.toLowerCase().includes(query));
-  updateLeaderboards(filtered);
+  renderBoards(filtered);
 }
 
 
