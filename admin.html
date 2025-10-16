@@ -101,14 +101,77 @@
     <h3>🧾 Players Added</h3>
   </div>
 
-  <script>
-    const form = document.getElementById("playerForm");
-    const list = document.getElementById("playerList");
-    const saveBtn = document.getElementById("saveBtn");
-    const clearBtn = document.getElementById("clearBtn");
-    let players = [];
+<script>
+  const form = document.getElementById("playerForm");
+  const list = document.getElementById("playerList");
+  const saveBtn = document.getElementById("saveBtn");
+  const clearBtn = document.getElementById("clearBtn");
+  let players = [];
 
-    // Add Player
+  // Add Player
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const username = document.getElementById("username").value.trim();
+    const category = document.getElementById("category").value;
+    const value = parseInt(document.getElementById("value").value);
+
+    if (!username || isNaN(value)) return alert("Fill all fields!");
+
+    const avatarUrl = `https://minotar.net/avatar/${username}/64`;
+
+    let existing = players.find(p => p.name.toLowerCase() === username.toLowerCase());
+    if (existing) {
+      existing[category] = value;
+    } else {
+      players.push({
+        name: username,
+        avatar: avatarUrl,
+        skill: category === "skill" ? value : 0,
+        kills: category === "kills" ? value : 0,
+        playtime: category === "playtime" ? value : 0
+      });
+    }
+
+    renderPlayers();
+    form.reset();
+  });
+
+  // Render Players
+  function renderPlayers() {
+    list.innerHTML = `<h3>🧾 Players Added</h3>` + players.map(p => `
+      <div class="player-row">
+        <span>
+          <img src="${p.avatar}" style="width:30px; height:30px; border-radius:5px; vertical-align:middle; margin-right:8px;">
+          ${p.name}
+        </span>
+        <span>
+          🏆 ${p.skill} | ⚔️ ${p.kills} | ⌚ ${p.playtime}
+        </span>
+      </div>
+    `).join("");
+  }
+
+  // Save to file
+  saveBtn.addEventListener("click", () => {
+    if (players.length === 0) return alert("No players added yet!");
+    const blob = new Blob([JSON.stringify(players, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "stats.json";
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  // Clear List
+  clearBtn.addEventListener("click", () => {
+    if (confirm("Clear all players?")) {
+      players = [];
+      renderPlayers();
+    }
+  });
+</script>
+  // Add Player
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const username = document.getElementById("username").value.trim();
