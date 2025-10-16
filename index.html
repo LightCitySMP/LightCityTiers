@@ -9,23 +9,21 @@
   <script defer src="script.js"></script>
 </head>
 <body>
-  <!-- Header -->
+  <!-- HEADER -->
   <header>
     <div class="logo">LightCity<span>Tiers</span></div>
     <nav>
-      <ul>
-        <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
-        <li><a href="https://discord.gg/"> <i class="fab fa-discord"></i> Discord</a></li>
-      </ul>
+      <a href="#" class="active">Home</a>
+      <a href="https://discord.gg/">Discord</a>
     </nav>
-    <div class="search">
-      <input type="text" placeholder="Search player...">
-      <button><i class="fas fa-search"></i></button>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search player...">
+      <button id="searchBtn">🔍</button>
     </div>
   </header>
 
-  <!-- Tabs -->
-  <section class="tabs">
+  <!-- CATEGORY TABS -->
+  <section class="categories">
     <div class="tab active" data-tab="overall">
       <img src="https://minecraft.wiki/images/Trophy_JE2_BE2.png" alt="Trophy">
       <span>Overall Skill</span>
@@ -40,22 +38,21 @@
     </div>
   </section>
 
-  <!-- Leaderboards -->
+  <!-- LEADERBOARDS -->
   <section class="leaderboard active" id="overall">
     <h2>🏆 Overall Skill Leaderboard</h2>
-    <div class="leaderboard-list" id="overallList"></div>
+    <div class="list" id="overallList"></div>
   </section>
 
   <section class="leaderboard" id="kills">
     <h2>⚔️ Kills Leaderboard</h2>
-    <div class="leaderboard-list" id="killsList"></div>
+    <div class="list" id="killsList"></div>
   </section>
 
   <section class="leaderboard" id="playtime">
     <h2>⌚ Playtime Leaderboard</h2>
-    <div class="leaderboard-list" id="playtimeList"></div>
+    <div class="list" id="playtimeList"></div>
   </section>
-
-  <script src="https://kit.fontawesome.com/a2d9d6c54d.js" crossorigin="anonymous"></script>
 </body>
 </html>
+
