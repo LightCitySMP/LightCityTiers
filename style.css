@@ -1,3 +1,6 @@
+/* Import BBH Sans Bogle font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=BBH+Sans+Bogle:wght@400;600;700&display=swap');
+
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
@@ -110,6 +113,16 @@ nav a:hover {
   transition: transform 0.3s;
 }
 
+/* Apply BBH Sans Bogle font to category names */
+.category span {
+  font-family: "BBH Sans Bogle", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: #ffffff;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
 .icon {
   font-size: 70px;
   transition: transform 0.2s;
@@ -122,6 +135,7 @@ nav a:hover {
 .category.active span {
   color: #ffb300;
   border-bottom: 2px solid #ffb300;
+  text-shadow: 0 0 6px rgba(255, 179, 0, 0.5);
 }
 
 /* Leaderboard */
@@ -197,4 +211,3 @@ nav a:hover {
 .points {
   color: #ffb300;
 }
-
