@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  font-family: "BBH Sans Bogle", sans-serif;
-  background-color: #0f0f0f;
+  font-family: Arial, sans-serif;
+  background-color: #0d0d0d;
   color: #fff;
 }
 
@@ -10,9 +10,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #131519;
+  background-color: #111;
   padding: 15px 40px;
-  border-bottom: 2px solid #1a1a1a;
 }
 
 .logo {
@@ -22,18 +21,18 @@ body {
 }
 
 .logo span {
-  color: #fff;
+  color: white;
 }
 
 nav a {
   margin: 0 15px;
   text-decoration: none;
-  color: #ccc;
+  color: #bbb;
   font-weight: 600;
-  transition: color 0.3s;
 }
 
-nav a.active, nav a:hover {
+nav a.active,
+nav a:hover {
   color: #ffc107;
 }
 
@@ -43,7 +42,7 @@ nav a.active, nav a:hover {
   background-color: #1a1a1a;
   padding: 5px 10px;
   border-radius: 8px;
-  border: 1px solid #2a2a2a;
+  border: 1px solid #333;
 }
 
 .search-bar input {
@@ -60,67 +59,54 @@ nav a.active, nav a:hover {
   cursor: pointer;
 }
 
-/* Category Panel */
-.category-panel {
+/* Categories */
+.categories {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 60px;
-  background-color: #151515;
-  border: 2px solid rgba(255, 204, 0, 0.3);
-  border-radius: 20px;
-  padding: 20px 0;
+  gap: 100px;
   margin: 30px auto;
-  width: 80%;
-  transition: border-color 0.3s ease;
+  text-align: center;
 }
 
 .category {
-  text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.category img {
-  width: 60px;
   transition: transform 0.3s ease;
 }
 
-.category span {
-  display: block;
+.category img {
+  width: 70px;
+  transition: transform 0.3s ease;
+}
+
+.category p {
   margin-top: 8px;
-  font-size: 16px;
-  letter-spacing: 1px;
   color: #ccc;
+  font-weight: bold;
   transition: color 0.3s, text-shadow 0.3s;
 }
 
 .category:hover img {
-  transform: scale(1.15);
+  transform: scale(1.1);
 }
 
-.category:hover span {
+.category:hover p {
   color: #ffea70;
+  text-shadow: 0 0 6px #ffea70;
 }
 
-.category.active {
-  border-bottom: 3px solid #ffea70;
+.category.active p {
+  color: #ffc107;
+  text-shadow: 0 0 8px #ffc107;
 }
 
-.category.active span {
-  color: #ffea70;
-  text-shadow: 0 0 8px #ffea70;
-}
-
-/* Leaderboard */
+/* Leaderboards */
 .leaderboard {
   display: none;
   background-color: #151515;
-  border-radius: 15px;
-  margin: 30px auto;
-  width: 80%;
+  border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  width: 80%;
+  margin: 0 auto;
 }
 
 .leaderboard.active {
@@ -128,15 +114,65 @@ nav a.active, nav a:hover {
 }
 
 .leaderboard h2 {
+  color: #ffc107;
   border-left: 4px solid #ffc107;
   padding-left: 10px;
-  margin-bottom: 15px;
-  color: #ffc107;
+  margin-bottom: 20px;
 }
 
 .players {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
+}
+
+.player-card {
+  display: flex;
+  align-items: center;
+  background-color: #1f1f1f;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: transform 0.2s ease;
+}
+
+.player-card:hover {
+  transform: scale(1.02);
+}
+
+.player-card img {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+.player-card .rank {
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 15px;
+}
+
+.player-card:nth-child(1) .rank {
+  color: gold;
+}
+
+.player-card:nth-child(2) .rank {
+  color: silver;
+}
+
+.player-card:nth-child(3) .rank {
+  color: #cd7f32;
+}
+
+.player-card .info h3 {
+  margin: 0;
+  color: white;
+  font-size: 18px;
+}
+
+.player-card .info p {
+  margin: 3px 0 0;
+  color: #bbb;
+  font-size: 14px;
 }
 
