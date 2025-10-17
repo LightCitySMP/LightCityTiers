@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sections = document.querySelectorAll(".leaderboard");
   const searchInput = document.getElementById("searchInput");
 
-  // Switch between categories
+  // 🔸 Switch categories
   categories.forEach(cat => {
     cat.addEventListener("click", () => {
       categories.forEach(c => c.classList.remove("active"));
@@ -13,17 +13,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Load stats.json
+  // 🔸 Load stats.json and render players
   fetch("stats.json")
     .then(res => res.json())
     .then(players => {
-      renderLeaderboard(players, "overallList", "skill", "🏆");
-      renderLeaderboard(players, "killsList", "kills", "⚔️");
-      renderLeaderboard(players, "playtimeList", "playtime", "🕰️");
+      renderLeaderboard(players, "overallList", "skill", "🏆 Skill Points");
+      renderLeaderboard(players, "killsList", "kills", "⚔️ Kills");
+      renderLeaderboard(players, "playtimeList", "playtime", "🕰️ Hours");
     })
     .catch(err => console.error("Error loading stats:", err));
 
-  function renderLeaderboard(players, listId, statKey, icon) {
+  function renderLeaderboard(players, listId, statKey, label) {
     const list = document.getElementById(listId);
     list.innerHTML = "";
     players
@@ -36,14 +36,14 @@ document.addEventListener("DOMContentLoaded", () => {
           <img src="${p.avatar}" alt="${p.name}">
           <div class="info">
             <h3>${p.name}</h3>
-            <p>${icon} ${p[statKey]} ${statKey}</p>
+            <p>${label}: ${p[statKey]}</p>
           </div>
         `;
         list.appendChild(card);
       });
   }
 
-  // Search player
+  // 🔸 Search player
   searchInput.addEventListener("input", () => {
     const value = searchInput.value.toLowerCase();
     document.querySelectorAll(".player-card").forEach(card => {
@@ -52,5 +52,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-
 
