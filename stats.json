@@ -79,9 +79,9 @@
   {
     "name": "Arch",
     "avatar": "https://minotar.net/avatar/Arch/64",
-    "skill": 0,
-    "kills": 0,
-    "playtime": 0
+    "skill": 1000,
+    "kills": 1000,
+    "playtime": 1000
   },
   {
     "name": "bonnewar",
