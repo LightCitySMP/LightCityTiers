@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sections = document.querySelectorAll(".leaderboard");
   const searchInput = document.getElementById("searchInput");
 
-  // 🔸 Switch categories
+  // Switch categories
   categories.forEach(cat => {
     cat.addEventListener("click", () => {
       categories.forEach(c => c.classList.remove("active"));
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 🔸 Load stats.json and render players
+  // Load stats.json
   fetch("stats.json")
     .then(res => res.json())
     .then(players => {
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }
 
-  // 🔸 Search player
+  // Search player
   searchInput.addEventListener("input", () => {
     const value = searchInput.value.toLowerCase();
     document.querySelectorAll(".player-card").forEach(card => {
