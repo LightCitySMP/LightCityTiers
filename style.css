@@ -5,54 +5,46 @@ body {
   color: #fff;
 }
 
-/* 🔹 GLOWING NAVBAR TAB */
+/* 🔹 Navbar Glow Tab */
 .glow-navbar {
-  position: relative;
   background-color: #121417;
-  border-radius: 20px;
-  box-shadow: 0 0 25px rgba(255, 204, 0, 0.15);
-  margin: 20px auto;
+  border-radius: 16px;
+  margin: 25px auto;
   width: 90%;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  overflow: hidden;
+  padding: 10px 25px;
+  transition: box-shadow 0.4s ease, border-color 0.3s;
+  box-shadow: 0 0 25px rgba(255, 204, 0, 0.15);
+  border: 1px solid rgba(255, 204, 0, 0.1);
 }
 
-.glow-corner {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: radial-gradient(circle, rgba(255, 204, 0, 0.4), transparent 70%);
-  filter: blur(8px);
+.glow-navbar:hover {
+  box-shadow: 0 0 40px rgba(255, 204, 0, 0.35);
+  border: 1px solid rgba(255, 204, 0, 0.2);
 }
 
-.glow-corner.left {
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.glow-corner.right {
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-/* Navbar content inside glow tab */
+/* Navbar inside */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
 }
 
-.logo img {
-  height: 35px;
-  user-select: none;
+/* Logo text fix */
+.logo-text {
+  font-weight: bold;
+  font-size: 24px;
+  letter-spacing: 1px;
 }
 
+.logo-text .light {
+  color: #ffc107;
+}
+
+.logo-text .tiers {
+  color: white;
+}
+
+/* Nav links */
 nav {
   display: flex;
   align-items: center;
@@ -62,7 +54,7 @@ nav {
 nav a {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   text-decoration: none;
   color: #bbb;
   font-weight: 600;
@@ -70,11 +62,16 @@ nav a {
   transition: color 0.3s ease;
 }
 
+nav a i {
+  font-size: 16px;
+}
+
 nav a.active,
 nav a:hover {
   color: #ffc107;
 }
 
+/* Search bar */
 .search-bar {
   display: flex;
   align-items: center;
@@ -82,7 +79,7 @@ nav a:hover {
   border: 1px solid #333;
   border-radius: 20px;
   padding: 6px 12px;
-  transition: border-color 0.3s;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .search-bar i {
@@ -100,9 +97,10 @@ nav a:hover {
 
 .search-bar:hover {
   border-color: #ffc107;
+  box-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
 }
 
-/* 🔹 Categories Section */
+/* 🔹 Categories */
 .categories {
   display: flex;
   justify-content: center;
@@ -142,7 +140,7 @@ nav a:hover {
   text-shadow: 0 0 8px #ffc107;
 }
 
-/* 🔹 Leaderboard Section */
+/* 🔹 Leaderboard */
 .leaderboard {
   display: none;
   background-color: #151515;
