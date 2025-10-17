@@ -5,35 +5,69 @@ body {
   color: #fff;
 }
 
-/* Navbar */
+/* 🔹 GLOWING NAVBAR TAB */
+.glow-navbar {
+  position: relative;
+  background-color: #121417;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(255, 204, 0, 0.15);
+  margin: 20px auto;
+  width: 90%;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+
+.glow-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, rgba(255, 204, 0, 0.4), transparent 70%);
+  filter: blur(8px);
+}
+
+.glow-corner.left {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.glow-corner.right {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Navbar content inside glow tab */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #111;
-  padding: 15px 40px;
+  width: 100%;
 }
 
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #ffc107;
+.logo img {
+  height: 35px;
+  user-select: none;
 }
 
-.logo span {
-  color: white;
+nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
 }
 
 nav a {
-  margin: 0 15px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   text-decoration: none;
   color: #bbb;
   font-weight: 600;
-  transition: color 0.3s;
-}
-
-nav a i {
-  margin-right: 5px;
+  font-size: 15px;
+  transition: color 0.3s ease;
 }
 
 nav a.active,
@@ -44,10 +78,16 @@ nav a:hover {
 .search-bar {
   display: flex;
   align-items: center;
-  background-color: #1a1a1a;
-  padding: 5px 10px;
-  border-radius: 8px;
+  background-color: #1a1c20;
   border: 1px solid #333;
+  border-radius: 20px;
+  padding: 6px 12px;
+  transition: border-color 0.3s;
+}
+
+.search-bar i {
+  color: #777;
+  margin-right: 6px;
 }
 
 .search-bar input {
@@ -55,21 +95,19 @@ nav a:hover {
   border: none;
   color: white;
   outline: none;
+  width: 160px;
 }
 
-.search-bar button {
-  background: none;
-  border: none;
-  color: #ffc107;
-  cursor: pointer;
+.search-bar:hover {
+  border-color: #ffc107;
 }
 
-/* Categories */
+/* 🔹 Categories Section */
 .categories {
   display: flex;
   justify-content: center;
-  gap: 100px;
-  margin: 30px auto;
+  gap: 120px;
+  margin: 40px auto;
   text-align: center;
 }
 
@@ -104,7 +142,7 @@ nav a:hover {
   text-shadow: 0 0 8px #ffc107;
 }
 
-/* Leaderboards */
+/* 🔹 Leaderboard Section */
 .leaderboard {
   display: none;
   background-color: #151515;
@@ -112,6 +150,7 @@ nav a:hover {
   padding: 20px;
   width: 80%;
   margin: 0 auto;
+  box-shadow: 0 0 15px rgba(255, 204, 0, 0.1);
 }
 
 .leaderboard.active {
