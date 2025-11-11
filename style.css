@@ -1,143 +1,86 @@
-/* LightCityTiers global theme */
-:root {
-  --bg: #0d0d0d;
-  --panel: #141414;
-  --gold: #ffc400;
-  --accent: #ffb300;
-  --muted: #aaa;
-}
-
-html, body {
+body {
   margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
-  background: var(--bg);
+  font-family: "Poppins", sans-serif;
+  background: #0b0b0b;
   color: #fff;
 }
 
-/* Top navigation bar */
+/* NAVBAR */
 .topbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #101010;
-  padding: 10px 25px;
-  box-shadow: 0 2px 15px rgba(255, 187, 0, 0.2);
-  border-bottom: 1px solid rgba(255, 187, 0, 0.1);
+  padding: 12px 24px;
+  background: #000;
+  box-shadow: 0 0 20px #ffb30033;
 }
-
 .logo {
-  font-size: 22px;
+  color: #ffb300;
+  font-size: 20px;
   font-weight: 800;
-  color: var(--accent);
-  letter-spacing: 0.5px;
 }
-
 .nav a {
+  color: #ccc;
+  margin-left: 18px;
   text-decoration: none;
-  color: var(--muted);
-  margin-left: 20px;
   font-weight: 600;
-  transition: 0.2s;
+  transition: 0.3s;
+}
+.nav a.active, .nav a:hover {
+  color: #ffb300;
+  text-shadow: 0 0 8px #ffb300;
 }
 
-.nav a.active {
-  color: var(--gold);
-  text-shadow: 0 0 10px var(--gold);
-}
-
-.nav a:hover {
-  color: var(--gold);
-}
-
-/* Leaderboard section */
+/* LEADERBOARD */
 .leaderboard {
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 20px;
+  padding: 30px;
 }
-
 .player {
   display: flex;
   align-items: center;
-  background: var(--panel);
+  gap: 16px;
+  background: #111;
+  padding: 12px;
   border-radius: 12px;
-  padding: 14px;
-  margin-bottom: 14px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 20px #000;
+  margin-bottom: 12px;
 }
-
-.player:hover {
-  transform: scale(1.01);
-  box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
-}
-
 .avatar {
   width: 64px;
   height: 64px;
   border-radius: 8px;
-  margin-right: 16px;
 }
-
-.info h2 {
+.info h3 {
   margin: 0;
-  font-size: 20px;
+  font-weight: 700;
   color: #fff;
 }
-
-.stats {
-  color: var(--muted);
-  font-size: 14px;
-  margin-top: 4px;
-}
-
-/* Game modes row */
 .modes {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
+  gap: 10px;
+  margin-top: 6px;
 }
-
 .mode {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 6px;
-  background: rgba(255, 255, 255, 0.03);
-  padding: 6px 10px;
+  font-size: 12px;
+  background: #1b1b1b;
+  padding: 6px;
   border-radius: 8px;
-  border: 1px solid var(--tier);
-  transition: 0.2s;
+  transition: 0.3s;
 }
-
 .mode:hover {
-  box-shadow: 0 0 12px var(--tier);
-  transform: translateY(-2px);
+  transform: scale(1.1);
+  box-shadow: 0 0 10px var(--tier-color);
 }
-
 .modeicon {
-  width: 20px;
-  height: 20px;
-  filter: drop-shadow(0 0 4px var(--tier));
+  width: 28px;
+  height: 28px;
+  image-rendering: pixelated;
 }
-
-.tier {
-  font-weight: 700;
-  color: var(--tier);
-  text-shadow: 0 0 6px var(--tier);
-}
-
-/* Responsive */
-@media (max-width: 720px) {
-  .player {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .avatar {
-    margin-bottom: 10px;
-  }
-  .modes {
-    justify-content: flex-start;
-  }
-}
+.mode[data-tier^="LT5"], .mode[data-tier^="HT5"] { --tier-color: #b87333; }  /* bronze */
+.mode[data-tier^="LT4"], .mode[data-tier^="HT4"] { --tier-color: #cfcfcf; }  /* iron */
+.mode[data-tier^="LT3"], .mode[data-tier^="HT3"] { --tier-color: #ffd700; }  /* gold */
+.mode[data-tier^="LT2"], .mode[data-tier^="HT2"] { --tier-color: #5ad3ff; }  /* diamond */
+.mode[data-tier^="LT1"], .mode[data-tier^="HT1"] { --tier-color: #ff0055; }  /* ruby */
