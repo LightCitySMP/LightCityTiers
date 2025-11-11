@@ -1,71 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LightCityTiers</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LightCityTiers Leaderboard</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<header class="topbar">
+  <h1 class="logo">LightCityTiers</h1>
+  <nav class="nav">
+    <a href="index.html" class="active">🏠 Home</a>
+    <a href="admin.html">⚙️ Admin</a>
+  </nav>
+</header>
 
-  <!-- Glowing Navbar -->
-  <header>
-    <div class="glow-navbar">
-      <div class="navbar">
-        <div class="logo-text">
-          <span class="light">LightCity</span><span class="tiers">Tiers</span>
+<section id="leaderboard" class="leaderboard"></section>
+
+<script>
+async function loadBoard() {
+  const res = await fetch("stats.json");
+  const data = await res.json();
+  const lb = document.getElementById("leaderboard");
+  lb.innerHTML = "";
+  data.forEach(p=>{
+    const player = document.createElement("div");
+    player.className="player";
+    player.innerHTML = `
+      <img src="${p.avatar}" class="avatar">
+      <div class="info">
+        <h2>${p.name}</h2>
+        <div class="modes">
+          ${Object.entries(p.modes).map(([mode,obj])=>{
+            const color = tierColor(obj.tier);
+            return `
+              <div class="mode" style="--tier:${color}">
+                <img src="icons/${obj.icon}.png" alt="${mode}" class="modeicon">
+                <span>${mode}</span>
+                <span class="tier">${obj.tier}</span>
+              </div>`;
+          }).join("")}
         </div>
-
-        <nav>
-          <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
-          <a href="#"><i class="fab fa-discord"></i> Discord</a>
-        </nav>
-
-        <div class="search-bar">
-          <i class="fas fa-search"></i>
-          <input type="text" id="searchInput" placeholder="Search player..." />
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Categories -->
-  <section class="categories">
-    <div class="category active" data-tab="overall">
-      <div class="icon">🏆</div>
-      <p>Overall Skill</p>
-    </div>
-    <div class="category" data-tab="kills">
-      <div class="icon">⚔️</div>
-      <p>Kills</p>
-    </div>
-    <div class="category" data-tab="playtime">
-      <div class="icon">🕰️</div>
-      <p>Playtime</p>
-    </div>
-  </section>
-
-  <!-- Leaderboards -->
-  <main>
-    <section id="overall" class="leaderboard active">
-      <h2>🏆 Overall Skill Leaderboard</h2>
-      <div class="players" id="overallList"></div>
-    </section>
-
-    <section id="kills" class="leaderboard">
-      <h2>⚔️ Kills Leaderboard</h2>
-      <div class="players" id="killsList"></div>
-    </section>
-
-    <section id="playtime" class="leaderboard">
-      <h2>🕰️ Playtime Leaderboard</h2>
-      <div class="players" id="playtimeList"></div>
-    </section>
-  </main>
-
+        <p class="stats">🏆 ${p.skill} ⚔️ ${p.kills} ⌚ ${p.playtime} h</p>
+      </div>`;
+    lb.appendChild(player);
+  });
+}
+function tierColor(t){
+  if(/5/.test(t)) return "#b87333";
+  if(/4/.test(t)) return "#cfcfcf";
+  if(/3/.test(t)) return "#ffd700";
+  if(/2/.test(t)) return "#5ad3ff";
+  return "#ff0055";
+}
+loadBoard();
+</script>
 </body>
 </html>
-
-
