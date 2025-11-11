@@ -1,86 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: #0b0b0b;
+  font-family: 'Poppins', sans-serif;
+  background-color: #0b0b0b;
   color: #fff;
 }
 
-/* NAVBAR */
-.topbar {
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 24px;
-  background: #000;
-  box-shadow: 0 0 20px #ffb30033;
-}
-.logo {
-  color: #ffb300;
-  font-size: 20px;
-  font-weight: 800;
-}
-.nav a {
-  color: #ccc;
-  margin-left: 18px;
-  text-decoration: none;
-  font-weight: 600;
+  background-color: #111;
+  padding: 15px 25px;
+  box-shadow: 0 0 15px rgba(255, 200, 0, 0.2);
   transition: 0.3s;
 }
-.nav a.active, .nav a:hover {
+
+.navbar:hover {
+  box-shadow: 0 0 25px rgba(255, 200, 0, 0.5);
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffb300;
+  letter-spacing: 1px;
+}
+
+#searchBar {
+  background: #1a1a1a;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: white;
+  outline: none;
+  transition: 0.3s;
+}
+
+#searchBar:focus {
+  box-shadow: 0 0 8px #ffb300;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  background: #0f0f0f;
+  padding: 15px;
+}
+
+.tab {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.tab:hover {
   color: #ffb300;
   text-shadow: 0 0 8px #ffb300;
 }
 
-/* LEADERBOARD */
-.leaderboard {
-  padding: 30px;
+.tab.active {
+  color: #ffb300;
+  border-bottom: 2px solid #ffb300;
+  text-shadow: 0 0 10px #ffb300;
 }
-.player {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  background: #111;
-  padding: 12px;
-  border-radius: 12px;
-  box-shadow: 0 0 20px #000;
-  margin-bottom: 12px;
-}
-.avatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 8px;
-}
-.info h3 {
-  margin: 0;
-  font-weight: 700;
-  color: #fff;
-}
-.modes {
-  display: flex;
-  gap: 10px;
-  margin-top: 6px;
-}
-.mode {
+
+#leaderboard {
+  width: 90%;
+  margin: 30px auto;
   display: flex;
   flex-direction: column;
+  gap: 15px;
+}
+
+.player-card {
+  display: flex;
   align-items: center;
-  font-size: 12px;
-  background: #1b1b1b;
-  padding: 6px;
-  border-radius: 8px;
+  background: #111;
+  padding: 15px;
+  border-radius: 15px;
   transition: 0.3s;
+  box-shadow: 0 0 10px rgba(0,0,0,0.6);
 }
-.mode:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 10px var(--tier-color);
+
+.player-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(255, 200, 0, 0.3);
 }
-.modeicon {
-  width: 28px;
-  height: 28px;
-  image-rendering: pixelated;
+
+.rank {
+  font-size: 20px;
+  width: 40px;
+  text-align: center;
+  font-weight: bold;
 }
-.mode[data-tier^="LT5"], .mode[data-tier^="HT5"] { --tier-color: #b87333; }  /* bronze */
-.mode[data-tier^="LT4"], .mode[data-tier^="HT4"] { --tier-color: #cfcfcf; }  /* iron */
-.mode[data-tier^="LT3"], .mode[data-tier^="HT3"] { --tier-color: #ffd700; }  /* gold */
-.mode[data-tier^="LT2"], .mode[data-tier^="HT2"] { --tier-color: #5ad3ff; }  /* diamond */
-.mode[data-tier^="LT1"], .mode[data-tier^="HT1"] { --tier-color: #ff0055; }  /* ruby */
+
+.rank.gold { color: #ffd700; }
+.rank.silver { color: #c0c0c0; }
+.rank.bronze { color: #cd7f32; }
+
+.avatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+.info {
+  flex-grow: 1;
+}
+
+.name {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.region {
+  color: #999;
+  font-size: 14px;
+}
+
+.tiers {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+  font-size: 18px;
+}
+
