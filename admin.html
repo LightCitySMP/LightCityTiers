@@ -105,16 +105,37 @@
 
     <!-- Panel (hidden until login) -->
     <div class="panel" id="adminPanel">
-      <form id="addForm">
-        <input type="text" id="username" placeholder="Username (IGN)" required />
-        <select id="category">
-          <option value="skill">Overall Skill</option>
-          <option value="kills">Kills</option>
-          <option value="playtime">Playtime</option>
-        </select>
-        <input type="number" id="value" placeholder="Number" required />
-        <button type="submit">Add / Update</button>
-      </form>
+<form id="addForm">
+  <input type="text" id="username" placeholder="Username (IGN)" required />
+  <select id="category">
+    <option value="skill">Overall Skill</option>
+    <option value="kills">Kills</option>
+    <option value="playtime">Playtime</option>
+  </select>
+  <input type="number" id="value" placeholder="Number" required />
+
+  <!-- new line -->
+  <div class="mode-tier-row">
+    <select id="gamemode">
+      <option value="Sword">⚔️ Sword</option>
+      <option value="SMP">🪄 SMP</option>
+      <option value="UHC">❤️ UHC</option>
+      <option value="NethOP">🪓 NethOP</option>
+      <option value="Pot">⚗️ Pot</option>
+      <option value="Mace">🔨 Mace</option>
+      <option value="Axe">🪓 Axe</option>
+      <option value="Crystal">🔮 Crystal</option>
+    </select>
+
+    <select id="tier">
+      <option>LT5</option><option>LT4</option><option>LT3</option><option>LT2</option><option>LT1</option>
+      <option>HT5</option><option>HT4</option><option>HT3</option><option>HT2</option><option>HT1</option>
+    </select>
+  </div>
+
+  <button type="submit">Add / Update</button>
+</form>
+
 
       <div class="buttons">
         <button id="saveBtn">💾 Save stats.json</button>
