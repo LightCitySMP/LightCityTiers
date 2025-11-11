@@ -1,61 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LightCityTiers Leaderboard</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LightCityTiers Leaderboard</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="topbar">
-  <h1 class="logo">LightCityTiers</h1>
-  <nav class="nav">
-    <a href="index.html" class="active">🏠 Home</a>
-    <a href="admin.html">⚙️ Admin</a>
+  <header class="navbar">
+    <div class="logo">LightCityTiers</div>
+    <input type="text" id="searchBar" placeholder="Search player...">
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-type="skill">🏆 Overall Skill</button>
+    <button class="tab" data-type="kills">⚔️ Kills</button>
+    <button class="tab" data-type="playtime">⏱️ Playtime</button>
   </nav>
-</header>
 
-<section id="leaderboard" class="leaderboard">
-  <h2>🏆 Overall Skill Leaderboard</h2>
-  <div id="players"></div>
-</section>
+  <main id="leaderboard"></main>
 
-<script>
-async function loadBoard() {
-  try {
-    const res = await fetch("stats.json");
-    const data = await res.json();
-    const container = document.getElementById("players");
-    container.innerHTML = "";
-
-    data.forEach(p => {
-      const div = document.createElement("div");
-      div.className = "player";
-
-      // build gamemode icons
-      const modesHTML = p.modes ? Object.entries(p.modes).map(([mode,obj])=>{
-        return `<div class="mode" data-tier="${obj.tier}">
-                  <img src="icons/${obj.icon}.png" alt="${mode}" class="modeicon">
-                  <span>${obj.tier}</span>
-                </div>`;
-      }).join("") : "";
-
-      div.innerHTML = `
-        <img src="${p.avatar}" class="avatar" alt="${p.name}">
-        <div class="info">
-          <h3>${p.name}</h3>
-          <p>🏆 ${p.skill} ⚔️ ${p.kills} ⌚ ${p.playtime}h</p>
-          <div class="modes">${modesHTML}</div>
-        </div>
-      `;
-      container.appendChild(div);
-    });
-  } catch (err) {
-    document.getElementById("players").innerHTML = "<p style='color:red'>Error loading stats.json</p>";
-    console.error(err);
-  }
-}
-loadBoard();
-</script>
+  <script src="script.js"></script>
 </body>
 </html>
+
