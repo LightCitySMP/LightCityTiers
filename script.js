@@ -34,7 +34,18 @@ async function loadLeaderboard(type = "skill") {
 function formatTiers(tiers) {
   if (!tiers) return "";
   return Object.entries(tiers)
-    .map(([mode, tier]) => `<span title="${mode}">${tier}</span>`)
+    .map(([mode, tier]) => {
+      let color = "#555";
+      if (/5/.test(tier)) color = "#b87333"; // Bronze
+      else if (/4/.test(tier)) color = "#c0c0c0"; // Iron
+      else if (/3/.test(tier)) color = "#ffd700"; // Gold
+      else if (/2/.test(tier)) color = "#5ad3ff"; // Diamond
+      else if (/1/.test(tier)) color = "#ff0055"; // Ruby
+      return `
+        <span class="tier-badge" style="background:${color}" title="${mode}">
+          ${tier}
+        </span>`;
+    })
     .join("");
 }
 
