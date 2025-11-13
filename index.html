@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LightCityTiers Leaderboard</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LightCityTiers — Leaderboard</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="navbar">
     <div class="logo">LightCityTiers</div>
-    <input type="text" id="searchBar" placeholder="Search player...">
+    <input id="searchBar" type="text" placeholder="Search player...">
   </header>
 
-  <nav class="tabs">
+  <div class="tabs">
     <button class="tab active" data-type="skill">🏆 Overall Skill</button>
     <button class="tab" data-type="kills">⚔️ Kills</button>
     <button class="tab" data-type="playtime">⏱️ Playtime</button>
-  </nav>
+  </div>
 
-  <main id="leaderboard"></main>
+  <section id="leaderboard" class="leaderboard"></section>
+
+  <footer class="footer">
+    <p>© 2025 LightCityTiers | Designed for Light City SMP</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
 </html>
-
