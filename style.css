@@ -70,15 +70,15 @@ body {
 }
 
 .tab {
-  background: none;
+  background: transparent;
   border: none;
-  color: var(--text-dim);
-  font-size: 16px;
+  color: #ccc;
+  font-size: 17px;
   cursor: pointer;
-  padding: 10px 20px;
-  border-radius: 12px;
-  transition: var(--transition);
+  padding: 10px 25px;
+  border-radius: 20px;
   position: relative;
+  transition: all 0.25s ease;
 }
 
 .tab:hover {
@@ -88,11 +88,27 @@ body {
 
 .tab.active {
   color: var(--accent);
-  border-bottom: 2px solid var(--accent);
   text-shadow: 0 0 10px var(--accent);
 }
 
-/* ──────────────── LEADERBOARD CONTAINER ──────────────── */
+.tab.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  width: 50%;
+  height: 2px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, transparent, #ffb300, transparent);
+  animation: glowline 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes glowline {
+  from { opacity: 0.3; filter: blur(1px); }
+  to { opacity: 1; filter: blur(3px); }
+}
+
+/* ──────────────── LEADERBOARD ──────────────── */
 #leaderboard {
   width: 90%;
   margin: 30px auto;
@@ -117,7 +133,6 @@ body {
   box-shadow: 0 0 25px rgba(255, 200, 0, 0.4);
 }
 
-/* Rank styling */
 .rank {
   font-size: 20px;
   width: 45px;
@@ -129,7 +144,6 @@ body {
 .rank.silver { color: #c0c0c0; }
 .rank.bronze { color: #cd7f32; }
 
-/* Avatar and info */
 .avatar {
   width: 55px;
   height: 55px;
@@ -161,12 +175,11 @@ body {
   color: #ddd;
 }
 
-/* ──────────────── TIERS ──────────────── */
 .tiers {
   display: flex;
   gap: 6px;
-  margin-left: auto;
-  font-size: 16px;
+  margin-top: 5px;
+  flex-wrap: wrap;
 }
 
 .tier-badge {
@@ -183,6 +196,14 @@ body {
 .tier-badge:hover {
   transform: scale(1.1);
   box-shadow: 0 0 12px rgba(255, 200, 0, 0.6);
+}
+
+.footer {
+  text-align: center;
+  color: var(--text-dim);
+  padding: 20px 0;
+  font-size: 13px;
+  border-top: 1px solid rgba(255,255,255,0.05);
 }
 
 /* ──────────────── RESPONSIVE ──────────────── */
