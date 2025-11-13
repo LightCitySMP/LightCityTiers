@@ -1,21 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background-color: #0b0b0b;
-  color: #fff;
+:root {
+  --bg-dark: #0b0b0b;
+  --bg-card: #111;
+  --accent: #ffb300;
+  --text-light: #fff;
+  --text-dim: #aaa;
+  --transition: all 0.3s ease;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: var(--bg-dark);
+  color: var(--text-light);
+  overflow-x: hidden;
+}
+
+/* ──────────────── NAVBAR ──────────────── */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #111;
+  background: var(--bg-card);
   padding: 15px 25px;
   border-radius: 0 0 20px 20px;
   box-shadow: 0 0 15px rgba(255, 200, 0, 0.2);
-  transition: 0.3s;
+  transition: var(--transition);
 }
 
 .navbar:hover {
@@ -25,7 +41,7 @@ body {
 .logo {
   font-size: 22px;
   font-weight: 700;
-  color: #ffb300;
+  color: var(--accent);
   letter-spacing: 1px;
 }
 
@@ -34,15 +50,16 @@ body {
   border: none;
   padding: 8px 14px;
   border-radius: 10px;
-  color: white;
+  color: var(--text-light);
   outline: none;
-  transition: 0.3s;
+  transition: var(--transition);
 }
 
 #searchBar:focus {
-  box-shadow: 0 0 8px #ffb300;
+  box-shadow: 0 0 10px var(--accent);
 }
 
+/* ──────────────── TABS ──────────────── */
 .tabs {
   display: flex;
   justify-content: center;
@@ -55,25 +72,27 @@ body {
 .tab {
   background: none;
   border: none;
-  color: #aaa;
+  color: var(--text-dim);
   font-size: 16px;
   cursor: pointer;
   padding: 10px 20px;
   border-radius: 12px;
-  transition: 0.3s;
+  transition: var(--transition);
+  position: relative;
 }
 
 .tab:hover {
-  color: #ffb300;
-  text-shadow: 0 0 8px #ffb300;
+  color: var(--accent);
+  text-shadow: 0 0 8px var(--accent);
 }
 
 .tab.active {
-  color: #ffb300;
-  border-bottom: 2px solid #ffb300;
-  text-shadow: 0 0 10px #ffb300;
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+  text-shadow: 0 0 10px var(--accent);
 }
 
+/* ──────────────── LEADERBOARD CONTAINER ──────────────── */
 #leaderboard {
   width: 90%;
   margin: 30px auto;
@@ -82,24 +101,26 @@ body {
   gap: 15px;
 }
 
+/* ──────────────── PLAYER CARD ──────────────── */
 .player-card {
   display: flex;
   align-items: center;
-  background: #111;
+  background: var(--bg-card);
   padding: 15px;
   border-radius: 15px;
-  transition: 0.3s;
+  transition: var(--transition);
   box-shadow: 0 0 10px rgba(0,0,0,0.6);
 }
 
 .player-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 20px rgba(255, 200, 0, 0.3);
+  transform: scale(1.03);
+  box-shadow: 0 0 25px rgba(255, 200, 0, 0.4);
 }
 
+/* Rank styling */
 .rank {
   font-size: 20px;
-  width: 40px;
+  width: 45px;
   text-align: center;
   font-weight: bold;
 }
@@ -108,15 +129,25 @@ body {
 .rank.silver { color: #c0c0c0; }
 .rank.bronze { color: #cd7f32; }
 
+/* Avatar and info */
 .avatar {
   width: 55px;
   height: 55px;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-right: 15px;
+  transition: var(--transition);
+}
+
+.avatar:hover {
+  transform: rotate(5deg) scale(1.05);
+  box-shadow: 0 0 10px var(--accent);
 }
 
 .info {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .name {
@@ -124,12 +155,13 @@ body {
   font-size: 18px;
 }
 
-.region {
-  color: #ffb300;
-  font-size: 14px;
-  margin-top: 4px;
+.stats {
+  margin-top: 5px;
+  font-size: 15px;
+  color: #ddd;
 }
 
+/* ──────────────── TIERS ──────────────── */
 .tiers {
   display: flex;
   gap: 6px;
@@ -145,10 +177,36 @@ body {
   color: #111;
   font-size: 14px;
   box-shadow: 0 0 5px rgba(0,0,0,0.5);
-  transition: 0.3s;
+  transition: var(--transition);
 }
 
 .tier-badge:hover {
   transform: scale(1.1);
   box-shadow: 0 0 12px rgba(255, 200, 0, 0.6);
 }
+
+/* ──────────────── RESPONSIVE ──────────────── */
+@media (max-width: 700px) {
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tabs {
+    flex-wrap: wrap;
+  }
+
+  .player-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .avatar {
+    margin-bottom: 10px;
+  }
+
+  .tiers {
+    margin-top: 8px;
+  }
+}
+
