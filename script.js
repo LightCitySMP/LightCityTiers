@@ -18,15 +18,25 @@ async function loadLeaderboard(type = "skill") {
 
     const card = document.createElement("div");
     card.className = "player-card";
+
+    // Fallbacks
+    const skill = p.skill ?? 0;
+    const kills = p.kills ?? 0;
+    const playtime = p.playtime ?? 0;
+    const region = p.region ?? "Unknown";
+
     card.innerHTML = `
       <div class="rank ${rankClass}">#${rank}</div>
       <img src="${p.avatar}" class="avatar">
       <div class="info">
         <div class="name">${p.name}</div>
-        <div class="region">${p.region || "Unknown"}</div>
+        <div class="stats">
+          🏆 ${skill} ⚔️ ${kills} ⏱️ ${playtime}h 🌍 ${region}
+        </div>
+        <div class="tiers">${formatTiers(p.tiers)}</div>
       </div>
-      <div class="tiers">${formatTiers(p.tiers)}</div>
     `;
+
     lb.appendChild(card);
   });
 }
@@ -49,7 +59,7 @@ function formatTiers(tiers) {
     .join("");
 }
 
-// Search functionality
+// search
 document.getElementById("searchBar").addEventListener("input", e => {
   const search = e.target.value.toLowerCase();
   document.querySelectorAll(".player-card").forEach(card => {
@@ -58,7 +68,7 @@ document.getElementById("searchBar").addEventListener("input", e => {
   });
 });
 
-// Tab switching
+// tabs
 document.querySelectorAll(".tab").forEach(tab => {
   tab.addEventListener("click", () => {
     document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
@@ -67,5 +77,4 @@ document.querySelectorAll(".tab").forEach(tab => {
   });
 });
 
-// Initial load
 loadLeaderboard("skill");
