@@ -4,38 +4,406 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>LightCityTiers — Admin</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Basic page + theme */
+    :root {
+      --bg: #0e0e0e;
+      --panel: #141518;
+      --muted: #9ca3af;
+      --gold: #ffb300;
+      --accent: rgba(255,179,0,0.12);
+    }
+    html,body { height:100%; margin:0; font-family: "Poppins", sans-serif; background:var(--bg); color:#fff; }
+    .wrap { max-width:900px; margin:28px auto; padding:20px; }
+
+    .header {
+      display:flex; justify-content:space-between; align-items:center;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+      padding:14px 18px; border-radius:12px; gap:12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+    .title { font-weight:800; font-size:20px; color:var(--gold); }
+    .controls { display:flex; gap:8px; align-items:center; }
+
+    button, .btn {
+      background: linear-gradient(90deg,var(--gold), #ffcc4d);
+      color:#000; border:none; padding:8px 12px; border-radius:8px; cursor:pointer;
+      font-weight:700;
+    }
+    .ghost {
+      background: transparent; border: 1px solid rgba(255,255,255,0.06); color:var(--muted);
+      padding:8px 10px; border-radius:8px; cursor:pointer; font-weight:600;
+    }
+
+    /* panel */
+    .panel {
+      margin-top:18px; background:var(--panel); padding:18px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.5);
+      display:none; /* hidden until authenticated */
+    }
+
+    form#addForm { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    input[type="text"], input[type="number"], select {
+      background:#1b1d21; border:1px solid rgba(255,255,255,0.03); color:#fff; padding:10px; border-radius:8px;
+      font-size:14px;
+    }
+    input[type="text"] { width:180px; }
+    input[type="number"] { width:120px; }
+    select { width:170px; }
+
+    .buttons { display:flex; gap:12px; margin-top:12px; }
+    .player-list {
+      margin-top:16px; background: rgba(255,255,255,0.01); padding:12px; border-radius:10px;
+      max-height:420px; overflow:auto;
+    }
+    .player-item { display:flex; gap:12px; align-items:center; background:#121316; padding:10px; border-radius:8px; margin-bottom:8px; }
+    .player-item img { width:44px; height:44px; border-radius:6px; border:2px solid rgba(255,255,255,0.03); object-fit:cover; }
+    .player-info { display:flex; flex-direction:column; }
+    .player-info span { font-weight:700; }
+    .player-info small { color:var(--muted); }
+
+    .panel-foot { display:flex; justify-content:space-between; align-items:center; margin-top:14px; gap:12px; flex-wrap:wrap; }
+    .notice { color:var(--muted); font-size:13px; }
+
+    /* password modal */
+    .overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center;
+    }
+    .pw-box {
+      background:var(--panel); padding:20px; border-radius:12px; width:360px; box-shadow:0 12px 40px rgba(0,0,0,0.6);
+      text-align:center;
+    }
+    .pw-box h3 { margin:0 0 10px 0; color:var(--gold); }
+    .pw-box input { width:100%; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.04); background:#111; color:#fff; margin-bottom:10px; }
+    .pw-actions { display:flex; gap:8px; justify-content:center; }
+
+    /* change password area inside panel */
+    .change-wrap { margin-top:12px; background: rgba(255,255,255,0.01); padding:10px; border-radius:8px; }
+    .small { font-size:13px; color:var(--muted); }
+
+    /* responsive */
+    @media (max-width:720px){
+      .wrap { padding:12px; }
+      .header { flex-direction:column; gap:12px; align-items:flex-start; }
+      form#addForm { flex-direction:column; align-items:stretch; }
+      .search, .controls { width:100%; justify-content:space-between; }
+    }
+  </style>
 </head>
 <body>
   <div class="wrap">
-    <h1 class="logo">LightCityTiers — Admin</h1>
+    <div class="header">
+      <div>
+        <div class="title">LightCityTiers — Admin Panel</div>
+        <div class="small">Manage players and export stats.json</div>
+      </div>
 
-    <form id="addForm">
-      <input type="text" id="name" placeholder="Username" required>
-      <input type="number" id="skill" placeholder="Skill">
-      <input type="number" id="kills" placeholder="Kills">
-      <input type="number" id="playtime" placeholder="Playtime (h)">
-      
-      <select id="region">
-        <option value="NA">🇺🇸 North America</option>
-        <option value="EU">🇪🇺 Europe</option>
-        <option value="AS">🌏 Asia</option>
-        <option value="ME">🌍 Middle East</option>
-      </select>
+      <div class="controls">
+        <div id="sessionLabel" class="small" style="color:var(--muted)">Not authenticated</div>
+        <button id="logoutBtn" class="ghost" style="display:none">Log out</button>
+      </div>
+    </div>
 
-      <select id="tier">
-        <option>LT5</option><option>LT4</option><option>LT3</option><option>LT2</option><option>LT1</option>
-        <option>HT5</option><option>HT4</option><option>HT3</option><option>HT2</option><option>HT1</option>
-      </select>
+    <!-- Panel (hidden until login) -->
+    <div class="panel" id="adminPanel">
+<form id="addForm">
+  <input type="text" id="username" placeholder="Username (IGN)" required />
+  <select id="category">
+    <option value="skill">Overall Skill</option>
+    <option value="kills">Kills</option>
+    <option value="playtime">Playtime</option>
+  </select>
+  <input type="number" id="value" placeholder="Number" required />
 
-      <button type="submit">Add / Update</button>
-    </form>
+  <!-- new line -->
+  <div class="mode-tier-row">
+    <select id="gamemode">
+      <option value="Sword">⚔️ Sword</option>
+      <option value="SMP">🪄 SMP</option>
+      <option value="UHC">❤️ UHC</option>
+      <option value="NethOP">🪓 NethOP</option>
+      <option value="Pot">⚗️ Pot</option>
+      <option value="Mace">🔨 Mace</option>
+      <option value="Axe">🪓 Axe</option>
+      <option value="Crystal">🔮 Crystal</option>
+    </select>
 
-    <button id="exportBtn">💾 Export stats.json</button>
-
-    <div id="playerList"></div>
+    <select id="tier">
+      <option>LT5</option><option>LT4</option><option>LT3</option><option>LT2</option><option>LT1</option>
+      <option>HT5</option><option>HT4</option><option>HT3</option><option>HT2</option><option>HT1</option>
+    </select>
   </div>
 
-  <script src="admin.js"></script>
+  <button type="submit">Add / Update</button>
+</form>
+
+
+      <div class="buttons">
+        <button id="saveBtn">💾 Save stats.json</button>
+        <button id="clearBtn" class="ghost">Clear list</button>
+        <button id="exportPreview" class="ghost">Preview JSON</button>
+      </div>
+
+      <div class="player-list" id="playerList">
+        <h4 style="margin-top:0">Players</h4>
+        <div id="playersContainer"></div>
+      </div>
+
+      <div class="panel-foot">
+        <div class="notice">You can edit or delete players via the list. "Save" downloads stats.json for you to upload to GitHub.</div>
+
+        <div style="min-width:240px;">
+          <div class="change-wrap">
+            <div style="display:flex; gap:8px; align-items:center;">
+              <input id="changeCurr" type="password" placeholder="Current password" style="flex:1" />
+              <input id="changeNew" type="password" placeholder="New password" style="flex:1" />
+              <button id="changePw" class="ghost">Change</button>
+            </div>
+            <div class="small" style="margin-top:6px">Change password stores it in your browser only.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Password overlay -->
+  <div class="overlay" id="pwOverlay" style="display:none">
+    <div class="pw-box">
+      <h3>Admin Login</h3>
+      <input id="pwInput" type="password" placeholder="Enter admin password" />
+      <div style="height:8px"></div>
+      <div class="pw-actions">
+        <button id="pwSubmit" class="btn">Enter</button>
+        <button id="pwCancel" class="ghost">Cancel</button>
+      </div>
+      <div id="pwErr" class="small" style="margin-top:10px;color:#ff8b8b;display:none"></div>
+      <div style="margin-top:8px" class="small">This is client-side protection (not unbreakable). For real protection use a server auth.</div>
+    </div>
+  </div>
+
+  <script>
+  // ---------- CONFIG ----------
+  // Default password SHA-256 (hex) for: "lightcityadmin"
+  // Replace with your own SHA-256 hex if you want to change it in code.
+  const DEFAULT_HASH = "c807ed4f8f4754eb96627744d3b840e2bd671adddb89381ed5f2be386f2a3aae";
+
+  // keys for local/session storage
+  const HASH_KEY = "lct_admin_hash";      // stored hashed password (localStorage)
+  const AUTH_KEY = "lct_admin_auth";      // session flag (sessionStorage)
+
+  // ---------- helpers ----------
+  async function sha256Hex(str) {
+    const enc = new TextEncoder().encode(str);
+    const buf = await crypto.subtle.digest("SHA-256", enc);
+    const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,"0")).join("");
+    return hex;
+  }
+
+  function showOverlay(show=true) {
+    document.getElementById("pwOverlay").style.display = show ? "flex" : "none";
+  }
+  function showPanel(show=true) {
+    document.getElementById("adminPanel").style.display = show ? "block" : "none";
+    document.getElementById("logoutBtn").style.display = show ? "inline-block" : "none";
+    document.getElementById("sessionLabel").textContent = show ? "Authenticated" : "Not authenticated";
+  }
+
+  // ---------- auth flow ----------
+  // get stored hash (localStorage) or default
+  function getStoredHash() {
+    const h = localStorage.getItem(HASH_KEY);
+    return h || DEFAULT_HASH;
+  }
+
+  async function tryResumeSession() {
+    const authed = sessionStorage.getItem(AUTH_KEY);
+    if (authed === "1") {
+      // show panel
+      showOverlay(false);
+      showPanel(true);
+      initPanel(); // init admin functionality
+      return;
+    }
+    // show pw overlay
+    showOverlay(true);
+    showPanel(false);
+  }
+
+  // handle submit
+  document.getElementById("pwSubmit").addEventListener("click", async () => {
+    const val = document.getElementById("pwInput").value || "";
+    const h = await sha256Hex(val.trim());
+    const stored = getStoredHash();
+    if (h === stored) {
+      sessionStorage.setItem(AUTH_KEY, "1");
+      showOverlay(false);
+      showPanel(true);
+      document.getElementById("pwInput").value = "";
+      document.getElementById("pwErr").style.display = "none";
+      initPanel();
+    } else {
+      const e = document.getElementById("pwErr");
+      e.textContent = "Incorrect password.";
+      e.style.display = "block";
+    }
+  });
+
+  document.getElementById("pwCancel").addEventListener("click", () => {
+    // If user cancels, redirect to main site root (safer UX)
+    showOverlay(false);
+    alert("Access to admin panel cancelled.");
+    // optional: redirect back to site homepage:
+    window.location.href = "./";
+  });
+
+  // logout
+  document.getElementById("logoutBtn").addEventListener("click", () => {
+    sessionStorage.removeItem(AUTH_KEY);
+    showPanel(false);
+    showOverlay(true);
+  });
+
+  // change password (stores new hash in localStorage)
+  document.getElementById("changePw").addEventListener("click", async (e) => {
+    e.preventDefault();
+    const curr = document.getElementById("changeCurr").value || "";
+    const neu = document.getElementById("changeNew").value || "";
+    if (!curr || !neu) { alert("Fill both current and new password fields."); return; }
+    const currH = await sha256Hex(curr.trim());
+    const stored = getStoredHash();
+    if (currH !== stored) { alert("Current password incorrect."); return; }
+    const newH = await sha256Hex(neu.trim());
+    localStorage.setItem(HASH_KEY, newH);
+    document.getElementById("changeCurr").value = "";
+    document.getElementById("changeNew").value = "";
+    alert("Password changed for this browser.");
+  });
+
+  // ---------- admin panel logic ----------
+  let players = []; // in-memory
+
+  function initPanel() {
+    // If already initialized (players populated via admin actions), render existing
+    renderPlayers();
+
+    // form add
+    const form = document.getElementById("addForm");
+    form.addEventListener("submit", (ev) => {
+      ev.preventDefault();
+      const username = document.getElementById("username").value.trim();
+      const category = document.getElementById("category").value;
+      const value = parseInt(document.getElementById("value").value, 10);
+      if (!username || isNaN(value)) { alert("Fill valid username and number."); return; }
+      const avatar = `https://minotar.net/avatar/${encodeURIComponent(username)}/64`;
+      let existing = players.find(p => p.name.toLowerCase() === username.toLowerCase());
+      if (existing) {
+        existing[category] = value;
+      } else {
+        players.push({ name: username, avatar, skill: category==="skill"?value:0, kills: category==="kills"?value:0, playtime: category==="playtime"?value:0 });
+      }
+      renderPlayers();
+      form.reset();
+    });
+
+    document.getElementById("saveBtn").addEventListener("click", () => {
+      if (players.length === 0) { alert("No players to save."); return; }
+      const blob = new Blob([JSON.stringify(players, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = "stats.json"; a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById("clearBtn").addEventListener("click", () => {
+      if (!confirm("Clear all players from the panel?")) return;
+      players = [];
+      renderPlayers();
+    });
+
+    document.getElementById("exportPreview").addEventListener("click", () => {
+      const txt = JSON.stringify(players, null, 2);
+      const w = window.open("", "_blank");
+      w.document.body.style.background = "#111";
+      w.document.body.style.color = "#ddd";
+      w.document.title = "stats.json preview";
+      w.document.body.innerText = txt;
+    });
+  }
+
+  function renderPlayers() {
+    const container = document.getElementById("playersContainer");
+    if (!players || players.length === 0) {
+      container.innerHTML = `<div style="color:var(--muted); padding:8px">No players added yet.</div>`;
+      return;
+    }
+    container.innerHTML = players.map((p, idx) => {
+      return `
+        <div class="player-item" data-index="${idx}">
+          <img src="${p.avatar}" alt="${p.name}">
+          <div class="player-info">
+            <span>${p.name}</span>
+            <small>🏆 ${p.skill} | ⚔️ ${p.kills} | ⌚ ${p.playtime}</small>
+          </div>
+          <div style="margin-left:auto; display:flex; gap:8px; align-items:center">
+            <button class="ghost" data-action="edit" style="padding:6px 8px">Edit</button>
+            <button class="ghost" data-action="del" style="padding:6px 8px">Delete</button>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    // attach item listeners
+    container.querySelectorAll(".player-item").forEach(item => {
+      const idx = parseInt(item.getAttribute("data-index"), 10);
+      item.querySelector('[data-action="del"]').addEventListener("click", () => {
+        if (!confirm(`Delete ${players[idx].name}?`)) return;
+        players.splice(idx,1);
+        renderPlayers();
+      });
+      item.querySelector('[data-action="edit"]').addEventListener("click", () => {
+        const p = players[idx];
+        const newVal = prompt(`Edit ${p.name} (format: skill,kills,playtime)`, `${p.skill},${p.kills},${p.playtime}`);
+        if (!newVal) return;
+        const parts = newVal.split(",").map(s => parseInt(s.trim(),10) || 0);
+        p.skill = parts[0] || 0; p.kills = parts[1] || 0; p.playtime = parts[2] || 0;
+        renderPlayers();
+      });
+    });
+  }
+
+  // ---------- init ----------
+  tryResumeSession();
+
+  // If user pastes a JSON into the page (dev convenience), allow quick loading via drag/drop?
+  // (Optional) allow dropping a stats.json file onto the panel to load players
+  document.addEventListener('dragover', e => e.preventDefault());
+  document.addEventListener('drop', e => {
+    e.preventDefault();
+    const f = e.dataTransfer.files && e.dataTransfer.files[0];
+    if (!f) return;
+    if (!confirm(`Load ${f.name} into admin panel (this will replace current list)?`)) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const data = JSON.parse(ev.target.result);
+        if (!Array.isArray(data)) throw new Error("Invalid JSON");
+        players = data.map(p => ({
+          name: p.name || "Unknown",
+          avatar: p.avatar || `https://minotar.net/avatar/${encodeURIComponent(p.name || "Unknown")}/64`,
+          skill: p.skill || 0,
+          kills: p.kills || 0,
+          playtime: p.playtime || 0
+        }));
+        renderPlayers();
+        alert("Loaded players from file.");
+      } catch (err) {
+        alert("Failed to load JSON: " + err.message);
+      }
+    };
+    reader.readAsText(f);
+  });
+  </script>
+<!-- load the main admin logic -->
+<script src="script.js"></script>
 </body>
 </html>
+
