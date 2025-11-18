@@ -103,5 +103,19 @@
     "skill": 20,
     "kills": 1,
     "playtime": 11
+  },
+  {
+    "name": "VenIsDumb",
+    "avatar": "https://minotar.net/avatar/VenIsDumb/64",
+    "skill": 125,
+    "kills": 26,
+    "playtime": 16
+  },
+  {
+    "name": "cihanby",
+    "avatar": "https://minotar.net/avatar/cihanby/64",
+    "skill": 106,
+    "kills": 46,
+    "playtime": 28
   }
 ]
