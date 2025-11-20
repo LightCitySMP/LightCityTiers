@@ -117,5 +117,12 @@
     "skill": 106,
     "kills": 46,
     "playtime": 28
+  },
+  {
+    "name": "Mivvu",
+    "avatar": "https://minotar.net/avatar/Mivvu/64",
+    "skill": 62,
+    "kills": 3,
+    "playtime": 2
   }
 ]
